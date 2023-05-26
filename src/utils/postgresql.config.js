@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize";
 
 const POSTGRES_DB = process.env.POSTGRES_DB;
-const POSTGRES_USER = process.env.POSTGRES_USER;
-console.log(POSTGRES_DB, POSTGRES_USER)
+const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD;
 
-export default new Sequelize(`postgres://${POSTGRES_DB}:${POSTGRES_USER}@mouse.db.elephantsql.com/${POSTGRES_DB}`)
+export default new Sequelize(`postgres://${POSTGRES_DB}:${POSTGRES_PASSWORD}@mouse.db.elephantsql.com/${POSTGRES_DB}`)

@@ -16,7 +16,6 @@ Store.init(
       allowNull: false,
       unique: true,
       validate: {
-        isAlpha: true,
         len: [3, 50],
       },
     },
@@ -24,7 +23,21 @@ Store.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "not defined",
+    },
+    orders: {
+      type: DataTypes.ARRAY(DataTypes.UUID),
+      allowNull: false,
+      defaultValue: [],
   },
+    products: {
+      type: DataTypes.ARRAY(DataTypes.UUID),
+      allowNull: false,
+      defaultValue: [],
+  }},
   {
     sequelize,
     modelName: "Store",

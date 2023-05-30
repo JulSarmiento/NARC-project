@@ -1,3 +1,7 @@
+import { Sequelize } from "sequelize";
+import sequelize from "../utils/postgresql.config.js";
+import { Category, Subcategory } from "../models/index.js";
+
 const createCategoriesSubcategories = async () => {
   await sequelize.sync({ force: true });
 
@@ -37,5 +41,5 @@ const createCategoriesSubcategories = async () => {
   const cubiertos = await Subcategory.create({ name: 'Cubiertos', CategoryId: hogar.id });
 };
 
-export default createCategoriesSubcategories;
+export {createCategoriesSubcategories};
 

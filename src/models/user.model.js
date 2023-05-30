@@ -17,14 +17,13 @@ Users.init(
       unique: true,
       validate: {
         isNumeric: true,
-        len: [9, 10],
+        len: [10, 10],
       },
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
         len: [3, 50],
       },
     },
@@ -32,7 +31,6 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
         len: [3, 50],
       },
     },
@@ -68,19 +66,16 @@ Users.init(
       },
     },
     address: {
-      type: DataTypes.JSON,
-      allowNull: false,
-      validate: {
-        len: [3, 50],
-      },
-    },
-    role: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
-        len: [3, 50],
+        len: [3, 200],
       },
+    },
+    role: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
     status: {
       type: DataTypes.BOOLEAN,
@@ -90,10 +85,12 @@ Users.init(
     orders: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: true,
+      defaultValue: [],
     },
     cart: {
       type: DataTypes.ARRAY(DataTypes.UUID),
       allowNull: true,
+      defaultValue: [],
     },
   },
   {

@@ -14,3 +14,16 @@ export const getStores = async (_req, res, next) => {
     next(error);
   };
 }
+
+export const createStore = async (req, res, next) => {
+  try {
+    const store = await Store.create(req.body);
+    res.status(httpStatus.CREATED).json({
+      success: true,
+      data: store
+    });
+
+  } catch (error) {
+    next(error);
+  };
+}

@@ -37,4 +37,5 @@ const createCategoriesSubcategories = async () => {
   const cubiertos = await Subcategory.create({ name: 'Cubiertos', CategoryId: hogar.id });
 };
 
+export default createCategoriesSubcategories;
 

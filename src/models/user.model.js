@@ -1,14 +1,15 @@
-import {Model, DataTypes} from 'sequelize';
-import sequelize from '../utils/postgresql.config.js';
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../utils/postgresql.config.js";
 
-class Users extends Model {};
+class Users extends Model {}
 
-Users.init({
+Users.init(
+  {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      unique: true
+      unique: true,
     },
     dni: {
       type: DataTypes.INTEGER,
@@ -16,24 +17,24 @@ Users.init({
       unique: true,
       validate: {
         isNumeric: true,
-        len: [9, 10]
-      }
+        len: [9, 10],
+      },
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isAlpha: true,
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isAlpha: true,
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     email: {
       type: DataTypes.STRING,
@@ -41,63 +42,65 @@ Users.init({
       unique: true,
       validate: {
         isEmail: true,
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     birthdate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
-        isDate: true
-      }
+        isDate: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isNumeric: true,
-        len: [9, 10]
-      }
+        len: [9, 10],
+      },
     },
     address: {
-      type: DataTypes.OBJECT,
+      type: DataTypes.JSON,
       allowNull: false,
       validate: {
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     role: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isAlpha: true,
-        len: [3, 50]
-      }
+        len: [3, 50],
+      },
     },
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: true,
     },
     orders: {
       type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: true
+      allowNull: true,
     },
     cart: {
       type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: true
-    }
-  }, {
+      allowNull: true,
+    },
+  },
+  {
     sequelize,
-    modelName: 'users',
-    timestamps: true
-  });
+    modelName: "users",
+    timestamps: true,
+  }
+);
 
 export default Users;

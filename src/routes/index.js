@@ -1,6 +1,8 @@
 import express  from "express";
 import httpStatus from "http-status";
 
+import userRouter from "./user.routes.js";
+
 const router = express.Router();
 
 router.get('/health', (_req, res) => {
@@ -9,6 +11,7 @@ router.get('/health', (_req, res) => {
     status: 'up',
     enviroment: process.env.ENVIRONMENT || 'Not found'
   });
-});
+})
+  .use('/users', userRouter)
 
 export default router;

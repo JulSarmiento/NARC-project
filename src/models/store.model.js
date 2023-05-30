@@ -1,9 +1,9 @@
-import { Model, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 import sequelize from "../utils/postgresql.config.js";
 
-class OrderStatus extends Model {}
+class Store extends Sequelize.Model {}
 
-OrderStatus.init(
+Store.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -15,13 +15,22 @@ OrderStatus.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isAlpha: true,
+        len: [3, 50],
+      },
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "OrderStatus",
+    modelName: "Store",
     timestamps: false,
   }
 );
 
-export default OrderStatus;
+
+export default Store;

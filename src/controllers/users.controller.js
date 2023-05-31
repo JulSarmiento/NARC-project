@@ -21,8 +21,10 @@ export const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findByPk(id, {      
-      include: Order,
-      include: Cart
+      include: [        
+      { model: Order},
+      { model: Cart}
+    ]
     });
 
     if(!user) {
@@ -60,10 +62,6 @@ export const createUser = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await User.update(req.body, {
-      where: { id }
-    });
-
     const updatedUser = await User.findByPk(id);
 
     if(!updatedUser) {
@@ -72,6 +70,11 @@ export const updateUser = async (req, res, next) => {
         message: "User not found"
       });
     };
+
+    await User.update(req.body, {
+      where: { id },
+      returning: true
+    });
     res.status(httpStatus.OK).json({
       success: true,
       data: updatedUser

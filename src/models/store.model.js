@@ -26,17 +26,7 @@ Store.init(
     image: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    orders: {
-      type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: false,
-      defaultValue: [],
-  },
-    products: {
-      type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: false,
-      defaultValue: [],
-  }},
+    }},
   {
     sequelize,
     modelName: "Store",

@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { Op } from "sequelize";
 
-import { Store, Category, Order, Products } from "../models/index.js";
+import { Store, Category, Order, Product } from "../models/index.js";
 import { isID } from "../utils/isID.js";
 
 // GET all stores
@@ -26,7 +26,7 @@ export const getStoreByParam = async (req, res, next) => {
 
     if (validate) {
       const store = await Store.findByPk(param, {
-        include: [{ model: Order }, { model: Products }],
+        include: [{ model: Order }, { model: Product }],
       });
       if (!store) {
         return res.status(httpStatus.NOT_FOUND).json({
@@ -41,7 +41,7 @@ export const getStoreByParam = async (req, res, next) => {
     } else {
       const store = await Store.findOne({
         where: { name: { [Op.iLike]: param } },
-        include: [{ model: Order }, { model: Products }],
+        include: [{ model: Order }, { model: Product }],
       });
       if (!store) {
         return res.status(httpStatus.NOT_FOUND).json({

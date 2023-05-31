@@ -1,6 +1,6 @@
 import User from "./user.model.js";
 import Store from "./store.model.js";
-import Products from "./product.model.js";
+import Product from "./product.model.js";
 import Cart from "./cart.model.js";
 import Category from "./category.model.js";
 import Subcategory from "./subcategory.model.js";
@@ -9,10 +9,10 @@ import OrderStatus from "./orderStatus.model.js";
 
 Category.hasMany(Subcategory);
 Subcategory.belongsTo(Category);
-Subcategory.hasMany(Products);
-Products.belongsTo(Subcategory);
-Store.hasMany(Products);
-Products.belongsTo(Store);
+Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' });
+Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' });
+Store.hasMany(Product);
+Product.belongsTo(Store);
 Store.hasMany(Order);
 Order.belongsTo(Store);
 User.hasMany(Order);
@@ -24,15 +24,15 @@ User.hasMany(Order);
 Order.belongsTo(User);
 Category.hasMany(Store);
 Store.belongsTo(Category);
-Store.hasMany(Products);
-Products.belongsTo(Store);
+Store.hasMany(Product, { foreignKey: 'storeId' });
+Product.belongsTo(Store, { foreignKey: 'storeId' });
 Store.hasMany(Order);
 Order.belongsTo(Store);
 
 export {
   User,
   Store,
-  Products,
+  Product,
   Cart,
   Category,
   Subcategory,

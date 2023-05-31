@@ -21,8 +21,17 @@ export const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findByPk(id, {      
-      include: Order, Cart
+      include: Order,
+      include: Cart
     });
+
+    if(!user) {
+      res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        message: "User not found"
+      });
+    };
+
     res.status(httpStatus.OK).json({
       success: true,
       data: user
@@ -56,6 +65,13 @@ export const updateUser = async (req, res, next) => {
     });
 
     const updatedUser = await User.findByPk(id);
+
+    if(!updatedUser) {
+      res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        message: "User not found"
+      });
+    };
     res.status(httpStatus.OK).json({
       success: true,
       data: updatedUser
@@ -73,6 +89,14 @@ export const deleteUser = async (req, res, next) => {
     await User.destroy({
       where: { id }
     });
+
+    if(!userToDelete) {
+      res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        message: "User not found"
+      });
+    };
+    
     res.status(httpStatus.OK).json({
       success: true,
       message: `Deleted user: ${userToDelete.name} ${userToDelete.lastName}.`

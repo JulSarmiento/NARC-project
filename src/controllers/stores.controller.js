@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 
-import { Store } from "../models/index.js";
+import { Store, Category } from "../models/index.js";
 
 export const getStores = async (_req, res, next) => {
   try {
@@ -17,7 +17,18 @@ export const getStores = async (_req, res, next) => {
 
 export const createStore = async (req, res, next) => {
   try {
-    const store = await Store.create(req.body);
+    const {name, image, orders, products, CategoryId} = req.body;
+    const category = await Category.findByPk(CategoryId);
+
+    const newStore = {
+      name,
+      image,
+      orders,
+      products,
+      CategoryId,
+      category : category.name
+    }
+    const store = await Store.create(newStore);
     res.status(httpStatus.CREATED).json({
       success: true,
       data: store

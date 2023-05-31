@@ -19,14 +19,13 @@ Store.init(
         len: [3, 50],
       },
     },
+    category: {
+      type: DataTypes.STRING,
+      defaultValue: "Other",
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "not defined",
     },
     orders: {
       type: DataTypes.ARRAY(DataTypes.UUID),

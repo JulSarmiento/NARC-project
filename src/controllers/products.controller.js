@@ -60,8 +60,6 @@ export const getProductByParam = async (req, res, next) => {
   }
 };
 
-
-
 // POST new product
 export const createProduct = async (req, res, next) => {
   try {
@@ -90,9 +88,7 @@ export const createProduct = async (req, res, next) => {
       stock,
       image,
       storeId,
-      subcategoryId,
-      store: store.name,      
-      subcategory: subcategory.name,
+      subcategoryId
     };
 
     await Product.create(newProduct);
@@ -104,3 +100,43 @@ export const createProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+// PATCH product by id
+export const updateProduct = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        error: "Product not found",
+      });
+    }
+
+    await Product.update(req.body, { where: { id } });
+
+    const updatedProduct = await Product.findByPk(id);
+    res.status(httpStatus.OK).json({
+      success: true,
+      data: updatedProduct,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// DELETE product by id
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Product.destroy({ where: { id } });
+    res.status(httpStatus.OK).json({
+      success: true,
+      data: {},
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+

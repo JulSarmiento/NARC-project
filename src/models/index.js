@@ -9,10 +9,10 @@ import OrderStatus from "./orderStatus.model.js";
 
 Category.hasMany(Subcategory);
 Subcategory.belongsTo(Category);
-Subcategory.hasMany(Product, { foreignKey: 'subcategoryId' });
-Product.belongsTo(Subcategory, { foreignKey: 'subcategoryId' });
+Subcategory.hasMany(Product);
+Product.belongsTo(Subcategory);
 Store.hasMany(Product);
-Product.belongsTo(Store);
+Product.belongsTo(Store, { foreignKey: "storeId" });
 Store.hasMany(Order);
 Order.belongsTo(Store);
 User.hasMany(Order);
@@ -24,8 +24,7 @@ User.hasMany(Order);
 Order.belongsTo(User);
 Category.hasMany(Store);
 Store.belongsTo(Category);
-Store.hasMany(Product, { foreignKey: 'storeId' });
-Product.belongsTo(Store, { foreignKey: 'storeId' });
+Store.hasMany(Product);
 Store.hasMany(Order);
 Order.belongsTo(Store);
 

@@ -12,12 +12,12 @@ Users.init(
       unique: true,
     },
     dni: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
         isNumeric: true,
-        len: [10, 10],
+        len: [9, 10],
       },
     },
     name: {
@@ -81,17 +81,7 @@ Users.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
-    },
-    orders: {
-      type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: true,
-      defaultValue: [],
-    },
-    cart: {
-      type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: true,
-      defaultValue: [],
-    },
+    }
   },
   {
     sequelize,

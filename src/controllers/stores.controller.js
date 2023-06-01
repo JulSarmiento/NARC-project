@@ -7,7 +7,9 @@ import { isID } from "../utils/isID.js";
 // GET all stores
 export const getStores = async (_req, res, next) => {
   try {
-    const stores = await Store.findAll();
+    const stores = await Store.findAll({
+      include: [{ model: Category }],
+    });
     res.status(httpStatus.OK).json({
       success: true,
       data: stores,
@@ -97,7 +99,7 @@ export const updateStore = async (req, res, next) => {
         success: false,
         error: "Store not found",
       });
-    };
+    }
 
     const updatedStore = {
       name,
@@ -136,7 +138,7 @@ export const deleteStore = async (req, res, next) => {
         success: false,
         error: "Store not found",
       });
-    };
+    }
 
     await Store.destroy({
       where: { id },

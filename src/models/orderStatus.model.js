@@ -19,7 +19,7 @@ OrderStatus.init(
   },
   {
     sequelize,
-    modelName: "OrderStatus",
+    // modelName: "OrderStatus",
     timestamps: false,
   }
 );

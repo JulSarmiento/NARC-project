@@ -25,6 +25,8 @@ export const getProductByParam = async (req, res, next) => {
     const validate = isID(param);
     console.log(param);
 
+
+
     if (validate) {
       const product = await Product.findByPk(param, {
         include: [{ model: Store }, { model: Subcategory }],
@@ -42,8 +44,13 @@ export const getProductByParam = async (req, res, next) => {
     } else {
       const product = await Product.findOne({
         where: { name: { [Op.iLike]: param } },
-        include: [{ model: Store }, { model: Subcategory }],
+
+        include: [
+          { model: Store, foreignKey: "storeId" },
+          { model: Subcategory, foreignKey: "subcategoryId" },
+        ],
       });
+
       if (!product) {
         return res.status(httpStatus.NOT_FOUND).json({
           success: false,
@@ -63,38 +70,10 @@ export const getProductByParam = async (req, res, next) => {
 // POST new product
 export const createProduct = async (req, res, next) => {
   try {
-    const { name, description, price, stock, image, storeId, subcategoryId } =
-      req.body;
-    const store = await Store.findByPk(storeId);
-    const subcategory = await Subcategory.findByPk(subcategoryId);
-    if (!store) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        success: false,
-        error: "Store not found",
-      });
-    }
-
-    if (!subcategory) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        success: false,
-        error: "Subcategory not found",
-      });
-    }
-
-    const newProduct = {
-      name,
-      description,
-      price,
-      stock,
-      image,
-      storeId,
-      subcategoryId
-    };
-
-    await Product.create(newProduct);
+    const product = await Product.create(req.body);
     res.status(httpStatus.CREATED).json({
       success: true,
-      data: newProduct,
+      data: product,
     });
   } catch (error) {
     next(error);
@@ -104,7 +83,7 @@ export const createProduct = async (req, res, next) => {
 // PATCH product by id
 export const updateProduct = async (req, res, next) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const product = await Product.findByPk(id);
 
     if (!product) {
@@ -124,7 +103,7 @@ export const updateProduct = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 // DELETE product by id
 export const deleteProduct = async (req, res, next) => {
@@ -138,5 +117,4 @@ export const deleteProduct = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
-
+};

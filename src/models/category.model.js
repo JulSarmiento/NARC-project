@@ -17,8 +17,8 @@ Category.init({
   }
 }, {
   sequelize,
-  modelName: 'Category',
-  timestamps: false
+  modelName: 'category',
+  timestamps: true
 });
 
 export default Category;

@@ -85,7 +85,7 @@ Users.init(
   },
   {
     sequelize,
-    modelName: "users",
+    // modelName: "users",
     timestamps: true,
   }
 );

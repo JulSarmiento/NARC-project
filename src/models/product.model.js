@@ -51,7 +51,9 @@ Product.init(
   },
   {
     sequelize,
-    modelName: "Product",
+    defaultScope: {
+      attributes: { exclude: ["storeId", "subcategoryId"] },
+    },
     timestamps: false,
   }
 );

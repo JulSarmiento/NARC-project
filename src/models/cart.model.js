@@ -22,7 +22,7 @@ Cart.init(
   },
   {
     sequelize,
-    modelName: "Cart",
+    // modelName: "Cart",
     timestamps: false,
   }
 );

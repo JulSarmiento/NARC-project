@@ -1,3 +1,5 @@
+import { DataTypes } from "sequelize";
+
 import User from "./user.model.js";
 import Store from "./store.model.js";
 import Product from "./product.model.js";
@@ -7,26 +9,33 @@ import Subcategory from "./subcategory.model.js";
 import Order from "./order.model.js";
 import OrderStatus from "./orderStatus.model.js";
 
-Category.hasMany(Subcategory);
-Subcategory.belongsTo(Category);
-Subcategory.hasMany(Product);
-Product.belongsTo(Subcategory);
-Store.hasMany(Product);
-Product.belongsTo(Store, { foreignKey: "storeId" });
-Store.hasMany(Order);
-Order.belongsTo(Store);
-User.hasMany(Order);
-Order.belongsTo(User);
-Order.belongsTo(OrderStatus);
-User.hasMany(Cart);
-Cart.belongsTo(User);
-User.hasMany(Order);
-Order.belongsTo(User);
-Category.hasMany(Store);
-Store.belongsTo(Category);
-Store.hasMany(Product);
-Store.hasMany(Order);
-Order.belongsTo(Store);
+const FOREIGN_KEY = { allowNull: false, type: DataTypes.UUID };
+
+Category.hasMany(Subcategory, FOREIGN_KEY);
+// Category.hasMany(Store);
+
+// Subcategory.belongsTo(Category, FOREIGN_KEY);
+// Subcategory.hasMany(Product);
+
+Product.belongsTo(Subcategory, FOREIGN_KEY);
+Product.belongsTo(Store, FOREIGN_KEY);
+
+// Product.hasOne(Subcategory, { foreignKey: { name: "subcategoryId", allowNull: false } });
+// Product.hasOne(Store, { foreignKey: { name: "storeId", allowNull: false } });
+
+Store.hasMany(Product, FOREIGN_KEY);
+Store.belongsTo(Category, FOREIGN_KEY);
+// Store.hasMany(Order);
+// Store.belongsTo(Category);
+
+// Order.belongsTo(OrderStatus);
+// Order.belongsTo(Store);
+// Order.belongsTo(User);
+
+// User.hasMany(Order);
+// User.hasMany(Cart);
+
+// Cart.belongsTo(User);
 
 export {
   User,

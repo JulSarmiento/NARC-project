@@ -18,7 +18,7 @@ Subcategory.init({
 
 }, {
   sequelize,
-  modelName: "Subcategory",
+  modelName: "subcategory",
   timestamps: false
 });
 

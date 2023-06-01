@@ -19,17 +19,13 @@ Store.init(
         len: [3, 50],
       },
     },
-    category: {
-      type: DataTypes.STRING,
-      defaultValue: "Other",
-    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
     }},
   {
     sequelize,
-    modelName: "Store",
+    modelName: "store",
     timestamps: false,
   }
 );

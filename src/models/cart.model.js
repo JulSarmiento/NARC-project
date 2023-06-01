@@ -14,6 +14,7 @@ Cart.init(
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
       validate: {
         isNumeric: true,
         len: [1, 10],

@@ -5,7 +5,6 @@ import userRouter from "./user.routes.js";
 import storeRouter from "./stores.routes.js";
 import productRouter from "./products.routes.js";
 import orderRouter from "./orders.routes.js";
-import cartRouter from "./cart.routes.js";
 import categoryRouter from "./categories.routes.js";
 
 const router = express.Router();
@@ -22,7 +21,6 @@ router
   .use("/stores", storeRouter)
   .use("/products", productRouter)
   .use("/orders", orderRouter)
-  .use("/cart", cartRouter)
   .use("/categories", categoryRouter)
 
 export default router;

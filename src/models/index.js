@@ -8,6 +8,7 @@ import Category from "./category.model.js";
 import Subcategory from "./subcategory.model.js";
 import Order from "./order.model.js";
 import OrderStatus from "./orderStatus.model.js";
+import Users from "./user.model.js";
 
 const FOREIGN_KEY = { allowNull: false, type: DataTypes.UUID };
 
@@ -25,17 +26,18 @@ Product.belongsTo(Store, FOREIGN_KEY);
 
 Store.hasMany(Product, FOREIGN_KEY);
 Store.belongsTo(Category, FOREIGN_KEY);
-// Store.hasMany(Order);
+Store.hasMany(Order, FOREIGN_KEY);
 // Store.belongsTo(Category);
 
 // Order.belongsTo(OrderStatus);
 // Order.belongsTo(Store);
-// Order.belongsTo(User);
+Order.belongsTo(User, FOREIGN_KEY);
 
-// User.hasMany(Order);
-// User.hasMany(Cart);
+User.hasMany(Order, FOREIGN_KEY);
+Users.hasOne(Cart, FOREIGN_KEY);
 
-// Cart.belongsTo(User);
+Cart.belongsTo(User, FOREIGN_KEY);
+Cart.hasMany(Product, FOREIGN_KEY);
 
 export {
   User,

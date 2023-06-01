@@ -23,45 +23,20 @@ export const getProductByParam = async (req, res, next) => {
   try {
     const param = req.params.param;
     const validate = isID(param);
-    console.log(param);
 
-
-
-    if (validate) {
-      const product = await Product.findByPk(param, {
-        include: [{ model: Store }, { model: Subcategory }],
-      });
-      if (!product) {
-        return res.status(httpStatus.NOT_FOUND).json({
-          success: false,
-          error: "Product not found",
+    const product = validate
+      ? await Product.findByPk(param, {
+          include: [{ model: Store }, { model: Subcategory }],
+        })
+      : await Product.findOne({
+          where: { name: { [Op.iLike]: param } },
+          include: [{ model: Store }, { model: Subcategory }],
         });
-      }
-      res.status(httpStatus.OK).json({
-        success: true,
-        data: product,
-      });
-    } else {
-      const product = await Product.findOne({
-        where: { name: { [Op.iLike]: param } },
 
-        include: [
-          { model: Store, foreignKey: "storeId" },
-          { model: Subcategory, foreignKey: "subcategoryId" },
-        ],
-      });
-
-      if (!product) {
-        return res.status(httpStatus.NOT_FOUND).json({
-          success: false,
-          error: "Product not found",
-        });
-      }
-      res.status(httpStatus.OK).json({
-        success: true,
-        data: product,
-      });
-    }
+    res.status(httpStatus.OK).json({
+      success: true,
+      data: product,
+    });
   } catch (error) {
     next(error);
   }
@@ -93,7 +68,9 @@ export const updateProduct = async (req, res, next) => {
       });
     }
 
-    await Product.update(req.body, { where: { id } });
+    await Product.update(req.body, {
+      where: { id },
+    });
 
     const updatedProduct = await Product.findByPk(id);
     res.status(httpStatus.OK).json({
@@ -108,7 +85,7 @@ export const updateProduct = async (req, res, next) => {
 // DELETE product by id
 export const deleteProduct = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     await Product.destroy({ where: { id } });
     res.status(httpStatus.OK).json({
       success: true,

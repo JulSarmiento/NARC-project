@@ -23,39 +23,20 @@ export const getStores = async (_req, res, next) => {
 export const getStoreByParam = async (req, res, next) => {
   try {
     const param = req.params.param;
-    const validate = isID(param);
-    console.log(param);
 
-    if (validate) {
-      const store = await Store.findByPk(param, {
-        include: [{ model: Order }, { model: Product }],
-      });
-      if (!store) {
-        return res.status(httpStatus.NOT_FOUND).json({
-          success: false,
-          error: "Store not found",
+    const store = isID(param)
+      ? await Store.findByPk(param, {
+          include: [{ model: Category }],
+        })
+      : await Store.findOne({
+          where: { name: { [Op.iLike]: param } },
+          include: [{ model: Category }],
         });
-      }
-      res.status(httpStatus.OK).json({
-        success: true,
-        data: store,
-      });
-    } else {
-      const store = await Store.findOne({
-        where: { name: { [Op.iLike]: param } },
-        include: [{ model: Order }, { model: Product }],
-      });
-      if (!store) {
-        return res.status(httpStatus.NOT_FOUND).json({
-          success: false,
-          error: "Store not found",
-        });
-      }
-      res.status(httpStatus.OK).json({
-        success: true,
-        data: store,
-      });
-    }
+
+    res.status(httpStatus.OK).json({
+      success: true,
+      data: store,
+    });
   } catch (error) {
     next(error);
   }
@@ -64,18 +45,7 @@ export const getStoreByParam = async (req, res, next) => {
 // POST new store
 export const createStore = async (req, res, next) => {
   try {
-    const { name, image, orders, products, CategoryId } = req.body;
-    const category = await Category.findByPk(CategoryId);
-
-    const newStore = {
-      name,
-      image,
-      orders,
-      products,
-      CategoryId,
-      category: category.name,
-    };
-    const store = await Store.create(newStore);
+    const store = await Store.create(req.body);
     res.status(httpStatus.CREATED).json({
       success: true,
       data: store,
@@ -89,9 +59,7 @@ export const createStore = async (req, res, next) => {
 
 export const updateStore = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const { name, image, orders, products, CategoryId } = req.body;
-    const category = await Category.findByPk(CategoryId);
+    const { id } = req.params;
     const storeToUpdate = await Store.findByPk(id);
 
     if (!storeToUpdate) {
@@ -101,25 +69,13 @@ export const updateStore = async (req, res, next) => {
       });
     }
 
-    const updatedStore = {
-      name,
-      image,
-      orders,
-      products,
-      CategoryId,
-      category: category.name,
-    };
-
-    await Store.update(updatedStore, {
+    await Store.update(req.body, {
       where: { id },
-      returning: true,
     });
-
-    const store = await Store.findByPk(id);
 
     res.status(httpStatus.OK).json({
       success: true,
-      data: store,
+      data: await Store.findByPk(id),
     });
   } catch (error) {
     next(error);
@@ -130,7 +86,7 @@ export const updateStore = async (req, res, next) => {
 
 export const deleteStore = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     const storeToDelete = await Store.findByPk(id);
 
     if (!storeToDelete) {
@@ -146,7 +102,7 @@ export const deleteStore = async (req, res, next) => {
 
     res.status(httpStatus.OK).json({
       success: true,
-      message: "Store deleted",
+      message: `The store "${storeToDelete.name}" was delete successfully`,
     });
   } catch (error) {
     next(error);

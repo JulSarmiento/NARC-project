@@ -3,12 +3,11 @@ import { DataTypes } from "sequelize";
 import User from "./user.model.js";
 import Store from "./store.model.js";
 import Product from "./product.model.js";
-import Cart from "./cart.model.js";
+import {Cart, CartItem} from "./cart.model.js";
 import Category from "./category.model.js";
 import Subcategory from "./subcategory.model.js";
 import Order from "./order.model.js";
 import OrderStatus from "./orderStatus.model.js";
-import Users from "./user.model.js";
 
 const FOREIGN_KEY = { allowNull: false, type: DataTypes.UUID };
 
@@ -34,16 +33,18 @@ Store.hasMany(Order, FOREIGN_KEY);
 Order.belongsTo(User, FOREIGN_KEY);
 
 User.hasMany(Order, FOREIGN_KEY);
-Users.hasOne(Cart, FOREIGN_KEY);
+// User.hasOne(Cart, FOREIGN_KEY);
 
 Cart.belongsTo(User, FOREIGN_KEY);
-Cart.hasMany(Product, FOREIGN_KEY);
+Cart.belongsTo(Store, FOREIGN_KEY);
+Cart.belongsToMany(Product, {...FOREIGN_KEY, through: CartItem});
 
 export {
   User,
   Store,
   Product,
   Cart,
+  CartItem,
   Category,
   Subcategory,
   Order,

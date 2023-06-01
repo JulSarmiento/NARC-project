@@ -12,7 +12,7 @@ Order.init({
   },
 }, {
   sequelize,
-  // modelName: "Order",
+  modelName: "order",
   timestamps: false
 });
 

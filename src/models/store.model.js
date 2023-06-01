@@ -26,7 +26,6 @@ Store.init(
   {
     sequelize,
     modelName: "store",
-    timestamps: false,
   }
 );
 

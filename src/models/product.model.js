@@ -54,7 +54,7 @@ Product.init(
     defaultScope: {
       attributes: { exclude: ["storeId", "subcategoryId"] },
     },
-    timestamps: false,
+    modelName: "product",
   }
 );
 

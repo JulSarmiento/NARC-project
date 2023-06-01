@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../utils/postgresql.config.js";
 
-class Users extends Model {}
+class User extends Model {}
 
-Users.init(
+User.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -85,9 +85,8 @@ Users.init(
   },
   {
     sequelize,
-    // modelName: "users",
-    timestamps: true,
-  }
+    modelName: "user",
+}
 );
 
-export default Users;
+export default User;

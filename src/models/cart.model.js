@@ -2,6 +2,7 @@ import { Model, DataTypes } from "sequelize";
 import sequelize from "../utils/postgresql.config.js";
 
 class Cart extends Model {}
+class CartItem extends Model {}
 
 Cart.init(
   {
@@ -10,24 +11,29 @@ Cart.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       unique: true,
-    },
-    quantity: {
+    }
+  },
+  {
+    sequelize,
+    modelName: "cart",
+    timestamps: true,
+  }
+);
+
+CartItem.init(
+  {
+    count: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-      validate: {
-        isNumeric: true,
-        len: [1, 10],
-      },
+      defaultValue: 1,
     },
   },
   {
     sequelize,
-    // modelName: "Cart",
+    modelName: "cartItem",
     timestamps: false,
   }
 );
 
 
 
-export default Cart;
+export { Cart, CartItem};

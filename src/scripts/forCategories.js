@@ -1,7 +1,7 @@
 import "dotenv/config.js";
 
 import sequelize from "../utils/postgresql.config.js";
-import { Category, Product, Store, Subcategory } from "../models/index.js";
+import { Category, Product, Store, Subcategory, Cart, User } from "../models/index.js";
 
 (async function () {
   await sequelize.drop({ cascade: true, force: true });
@@ -72,6 +72,32 @@ import { Category, Product, Store, Subcategory } from "../models/index.js";
 
   console.log("> Product created");
   console.table(product.dataValues);
+
+  const user = await User.create({
+    dni: "1357924680",
+    name: "Carlos",
+    lastname: "López",
+    email: "carlosl@example.com",
+    birthdate: "1998-09-20",
+    password: "abc123xyz",
+    phone: "123456789",
+    address: "Calle Principal 567, Ciudad, Departamento, Apartamento 404",
+    role: false,
+    status: true
+  });
+
+  console.log("> User created");
+  console.table(user.dataValues);
+
+  const cart = await Cart.create({
+    userId: user.id,
+    storeId: store.id
+  });
+
+  await cart.addProduct(product, { through: { count: 2 } }  )
+
+  console.log("> Cart created");
+  console.table(cart.dataValues);
 
   await sequelize.close();
 

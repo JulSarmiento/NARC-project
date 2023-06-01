@@ -15,11 +15,9 @@ Subcategory.init({
     allowNull: false,
     unique: true
   }
-
 }, {
   sequelize,
-  modelName: "subcategory",
-  timestamps: false
+  modelName: "subcategory"
 });
 
 export default Subcategory;

@@ -10,10 +10,55 @@ Order.init({
     primaryKey: true,
     unique: true
   },
+  coupon: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  details: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  status: {
+    type: DataTypes.ENUM,
+    values: ["pending", "completed", "cancelled"],
+    defaultValue: "pending"
+  },
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false
+  },
+  user: {
+    type: DataTypes.JSON,
+    allowNull: false
+  },
+  storeId: {
+    type: DataTypes.UUID,
+    allowNull: false
+  },
+  total: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  deliveryAddress: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  deliveryDate: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  products: {
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: false
+  },
+  paymentMethod: {
+    type: DataTypes.ENUM,
+    values: ["cash", "card"],
+    defaultValue: "cash"
+  }
 }, {
   sequelize,
-  modelName: "order",
-  timestamps: false
+  modelName: "order"
 });
 
 export default Order;

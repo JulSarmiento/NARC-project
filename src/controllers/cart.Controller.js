@@ -2,7 +2,8 @@ import {Cart, CartItem, Product} from "../models/index.js";
 
 export const getCart = async (req, res, next) => {
   const { storeId } = req.params;
-  const { userId } = req.query; // cambiar despues por jwt
+  const {id: userId} = req.user;
+
   try {
     const cart = await Cart.findOrCreate({
       where: { userId, storeId },
@@ -18,7 +19,8 @@ export const getCart = async (req, res, next) => {
 
 export const addProductToCart = async (req, res, next) => {
   const { storeId } = req.params;
-  const { userId } = req.query; // cambiar despues por jwt
+  const {id: userId} = req.user;
+  
   const { productId, count } = req.body;
   try {
     const [cart] = await Cart.findOrCreate({

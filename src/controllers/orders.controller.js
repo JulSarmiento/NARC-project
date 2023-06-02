@@ -4,8 +4,11 @@ import { Order, Store, User , Product, Cart, CartItem } from "../models/index.js
 
 export const getOrders = async (req, res, next) => {
   const { storeId } = req.params;
+  const { id: userId } = req.user;
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      where: { storeId },
+    });
     
     res.status(httpStatus.OK).json({
       success: true,

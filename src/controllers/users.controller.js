@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 
-import { User, Order, Cart, Store, Product } from "../models/index.js";
+import { User, Order, Cart, Product } from "../models/index.js";
 
 // GET list all users
 export const getUsers = async (_req, res, next) => {
@@ -20,7 +20,7 @@ export const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findByPk(id, {
-      include: [{ model: Order }, { model: Cart }],
+      include: [{ model: Order }],
     });
 
     res.status(httpStatus.OK).json({
@@ -105,8 +105,6 @@ export const updateCart = async (req, res, next) => {
     const cart = await Cart.findOrCreate({
       where: { userId: id },
     });
-
-    
 
     res.status(httpStatus.OK).json({
       success: true,

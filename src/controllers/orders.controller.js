@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 
-import { Order, Store, User , Product, Cart, CartItem } from "../models/index.js";
+import { Order, User , Product, Cart, CartItem } from "../models/index.js";
 
 export const getOrders = async (req, res, next) => {
   const { storeId } = req.params;

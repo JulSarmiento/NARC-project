@@ -9,7 +9,7 @@
     "start": "node server.js",
     "start:dev": "node --watch server.js",
     "start:nodemon": "nodemon server.js",
-    "createCategory": "node src/scripts/forCategories.js"
+    "createCategory": "node src/scripts/seeder.js"
   },
   "repository": {
     "type": "git",

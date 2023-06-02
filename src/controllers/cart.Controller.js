@@ -1,3 +1,4 @@
+import httpStatus from "http-status";
 import {Cart, CartItem, Product} from "../models/index.js";
 
 export const getCart = async (req, res, next) => {
@@ -10,7 +11,7 @@ export const getCart = async (req, res, next) => {
       include: [Product],
     });
 
-    res.status(200).json({
+    res.status(httpStatus.OK).json({
       success: true,
       data: cart
     });
@@ -38,7 +39,7 @@ export const addProductToCart = async (req, res, next) => {
     if(count === 0) {
       await cartItem.destroy();
 
-      res.status(200).json({
+      res.status(httpStatus.OK).json({
         success: true,
         message: "Product removed from cart"
       });
@@ -48,7 +49,7 @@ export const addProductToCart = async (req, res, next) => {
     cartItem.count = count;
     await cartItem.save();
 
-    res.status(200).json({
+    res.status(httpStatus.OK).json({
       success: true,
       data: cartItem
     });

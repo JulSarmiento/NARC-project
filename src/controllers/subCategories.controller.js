@@ -13,21 +13,6 @@ export const getSubCategories = async (_req, res, next) => {
   };
 }
 
-export const getSubCategoryByCategory = async (req, res, next) => {
-  try {
-    const { categoryId } = req.params;
-    const categorySelected = await Category.findByPk(categoryId, {
-      include: Subcategory
-    });
-    res.status(httpStatus.OK).json({
-      success: true,
-      data: categorySelected
-    });
-  } catch (error) {
-    next(error);
-  };
-}
-
 export const createSubCategory = async (req, res, next) => {
   try {
     const subcategory = await Subcategory.create(req.body);

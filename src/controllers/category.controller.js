@@ -19,7 +19,9 @@ export const getCategories = async (_req, res, next) => {
 export const getCategoryById = async (req, res, next) => {
   try {
     const { categoryId } = req.params;
-    const categorySelected = await Category.findByPk(categoryId);
+    const categorySelected = await Category.findByPk(categoryId, {
+      include: Subcategory
+    });
     res.status(httpStatus.OK).json({
       success: true,
       data: categorySelected
@@ -49,7 +51,9 @@ export const updateCategory = async (req, res, next) => {
     });
     res.status(httpStatus.OK).json({
       success: true,
-      date: await Category.findByPk(categoryId)
+      date: await Category.findByPk(categoryId, {
+        include: Subcategory
+      })
     });
   } catch (error) {
     next(error);

@@ -1,16 +1,23 @@
-import express from 'express';
+import express from "express";
 
-import { getOrders, getOrder, createOrder } from '../controllers/orders.controller.js';
-import authValidator from '../middlewares/auth.validator.js';
+import {
+  validateCreateOrder,
+  validateUpdateOrder
+} from "../middlewares/index.js";
 
+import {
+  getOrders,
+  // getOrder,
+  // createOrder,
+  // updateOrder,
+} from "../controllers/orders.controller.js";
+import authValidator from "../middlewares/auth.validator.js";
 
 const router = express.Router();
 
-router.get('/', authValidator, getOrders);
-router.get('/:orderId', authValidator, getOrder),
-router.post('/:storeId', authValidator, createOrder);
-
-
-
+router.get("/storeId", getOrders);
+// router.get("/:orderId", getOrder);
+// router.post("/:storeId",[ authValidator, validateCreateOrder], createOrder);
+// router.patch("/:orderId", [authValidator, validateUpdateOrder], updateOrder);
 
 export default router;

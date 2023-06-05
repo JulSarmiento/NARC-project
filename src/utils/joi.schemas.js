@@ -2,6 +2,7 @@ import Joi from "joi";
 
 // User Schema
 export const createUserSchema = Joi.object({
+  dni: Joi.string().min(9).max(10).required(),
   name: Joi.string().min(3).max(50).required(),
   lastname: Joi.string().min(3).max(50).required(),
   email: Joi.string().email().min(3).max(50).required(),
@@ -18,6 +19,7 @@ export const createUserSchema = Joi.object({
 });
 
 export const updateUserSchema = Joi.object({
+  dni: Joi.string().min(9).max(10).optional(),
   name: Joi.string().min(3).max(50).optional(),
   lastname: Joi.string().min(3).max(50).optional(),
   email: Joi.string().email().min(3).max(50).optional(),
@@ -38,13 +40,13 @@ export const updateUserSchema = Joi.object({
 export const createStoreSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
   image: Joi.string().required(),
-  categoryId: Joi.string().required()
+  categoryId: Joi.string().required(),
 });
 
 export const updateStoreSchema = Joi.object({
   name: Joi.string().min(3).max(50).optional(),
   image: Joi.string().optional(),
-  categoryId: Joi.string().optional()
+  categoryId: Joi.string().optional(),
 });
 
 // Product Schema
@@ -74,26 +76,38 @@ export const updateProductSchema = Joi.object({
 export const createOrderSchema = Joi.object({
   coupon: Joi.number().optional(),
   details: Joi.string().min(3).max(500).required(),
-  status: Joi.string().valid("Pending", "Payment Verified","Processing", "Shipped", "Delivered","cancelled").required(),
-  deliveryAddress: Joi.string().min(3).max(200).default().optional(),
-  paymentMethod: Joi.string().valid("cash", "card").default("cash").optional()
+  status: Joi.string()
+    .valid(
+      "Pending",
+      "Payment Verified",
+      "Processing",
+      "Shipped",
+      "Delivered",
+      "cancelled"
+    )
+    .required(),
+  deliveryAddress: Joi.string().min(3).max(200).optional(),
+  paymentMethod: Joi.string().valid("cash", "card").default("cash").optional(),
 });
 
 export const updateOrderSchema = Joi.object({
-  status: Joi.string().valid("Pending", "Payment Verified","Processing", "Shipped", "Delivered","cancelled").optional()
+  status: Joi.string()
+    .valid(
+      "Pending",
+      "Payment Verified",
+      "Processing",
+      "Shipped",
+      "Delivered",
+      "cancelled"
+    )
+    .optional(),
 });
 
 // Cart and CartItem Schema
 
-export const createCartItemSchema = Joi.object({
-  count: Joi.number().min(1).required(),
-  productId: Joi.string().required(),
-});
-
 export const createCartSchema = Joi.object({
-  userId: Joi.string().required(),
-  storeId: Joi.string().required(),
-  products: Joi.array().items(createCartItemSchema).required(),
+  count: Joi.number().min(0).required(),
+  productId: Joi.string().uuid().required(),
 });
 
 // Subcategory Schema
@@ -105,16 +119,15 @@ export const createSubcategorySchema = Joi.object({
 
 export const updateSubcategorySchema = Joi.object({
   name: Joi.string().min(3).max(50).optional(),
-  categoryId: Joi.string().optional()
+  categoryId: Joi.string().optional(),
 });
 
 // Category Schema
 
 export const createCategorySchema = Joi.object({
-  name: Joi.string().min(3).max(50).required()
+  name: Joi.string().min(3).max(50).required(),
 });
 
 export const updateCategorySchema = Joi.object({
-  name: Joi.string().min(3).max(50).optional()
+  name: Joi.string().min(3).max(50).optional(),
 });
-

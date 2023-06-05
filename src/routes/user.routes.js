@@ -5,17 +5,19 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-  getCart,
 } from "../controllers/users.controller.js";
+
+import {
+  validateCreateUser,
+  validateUpdateUser,
+} from "../middlewares/index.js";
 
 const router = express.Router();
 
 router.get("/", getUsers);
 router.get("/:id", getUserById);
-router.get("/:id/cart", getCart);
-router.patch("/:id/cart", getCart);
-router.post("/", createUser);
-router.patch("/:id", updateUser);
+router.post("/", [validateCreateUser], createUser);
+router.patch("/:id", [validateUpdateUser] ,updateUser);
 router.delete("/:id", deleteUser);
 
 export default router;

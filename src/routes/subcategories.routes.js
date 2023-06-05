@@ -1,20 +1,22 @@
-import  express  from "express";
+import express from "express";
 
-const router = express.Router();
+import {
+  validateCreateSubcategory,
+  validateUpdateSubcategory,
+} from "../middlewares/index.js";
 
 import {
   getSubCategories,
-  getSubCategoryByCategory,
   createSubCategory,
   updateSubCategory,
   deleteSubCategory,
 } from "../controllers/subCategories.controller.js";
 
+const router = express.Router();
 
 router.get("/", getSubCategories);
-router.get("/:categoryId", getSubCategoryByCategory);
-router.patch("/:subcategoryId", updateSubCategory);
-router.post("/", createSubCategory);
+router.patch("/:subcategoryId", [validateCreateSubcategory], updateSubCategory);
+router.post("/subcategoryId", [validateUpdateSubcategory], createSubCategory);
 router.delete("/:subcategoryId", deleteSubCategory);
 
 export default router;

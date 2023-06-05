@@ -22,11 +22,11 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 50],
+        len: [3, 200],
       },
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
         isNumeric: true,

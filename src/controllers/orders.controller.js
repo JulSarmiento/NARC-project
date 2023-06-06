@@ -18,108 +18,94 @@ export const getOrders = async (req, res, next) => {
   }
 };
 
-// export const getOrder = async (req, res, next) => {
-//   const { storeId, orderId } = req.params;
-//   const { id: userId } = req.user;
-//   try {
-//     const order = await Order.findOne({
-//       where: { id: orderId, storeId },
-//       include: [User],
-//     });
+export const getOrder = async (req, res, next) => {
+  const { storeId, orderId } = req.params;
+  const { id: userId } = req.user;
+  try {
+    const order = await Order.findOne({
+      where: { id: orderId, storeId },
+    });
 
-//     if (!order) {
-//       return res.status(httpStatus.NOT_FOUND).json({
-//         success: false,
-//         message: "Order not found",
-//       });
-//     }
+    if (!order) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
 
-//     res.status(httpStatus.OK).json({
-//       success: true,
-//       data: order,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    res.status(httpStatus.OK).json({
+      success: true,
+      data: order,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-// export const createOrder = async (req, res, next) => {
-//   const { storeId } = req.params;
-//   const { id: userId } = req.user;
+export const createOrder = async (req, res, next) => {
+  const { storeId } = req.params;
+  const { id: userId, address } = req.user;
 
-//   const { coupon, details, deliveryAddress, paymentMethod } = req.body;
-//   try {
-//     const cart = await Cart.findOne({
-//       where: { userId, storeId },
-//       include: [Product],
-//     });
+  let { coupon, details, deliveryAddress, paymentMethod } = req.body;
 
-//     if (!cart) {
-//       return res.status(httpStatus.NOT_FOUND).json({
-//         success: false,
-//         message: "Cart not found",
-//       });
-//     }
+  try {
+    if(!deliveryAddress){
+      deliveryAddress = address;
+    }
 
-//     const total = cart.products.reduce(
-//       (acc, { price, cartItem }) => acc + price * cartItem.count,
-//       0
-//     );
+    const cart = await Cart.findOne({
+      where: { userId, storeId },
+      include: [Product],
+    });
 
-//     const order = await Order.create({
-//       coupon,
-//       details,
-//       storeId: cart.storeId,
-//       userId: req.user.id,
-//       user: req.user.toJSON(),
-//       total,
-//       deliveryAddress,
-//       deliveryDate: new Date(),
-//       paymentMethod,
-//       products: cart.products.map(({ id, name, price, cartItem }) => ({
-//         id,
-//         name,
-//         price,
-//         count: cartItem.count,
-//       })),
-//     });
+    if (!cart) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        message: "Cart not found",
+      });
+    }
 
-//     await Promise.all(
-//       cart.products.map(async ({ id, cartItem }) => {
-//         const product = await Product.findByPk(id);
-//         product.stock -= cartItem.count;
-//         return product.save();
-//       })
-//     );
+    const total = cart.products.reduce(
+      (acc, { price, cartItem }) => acc + price * cartItem.count,
+      0
+    );
 
-//     await CartItem.destroy({
-//       where: { cartId: cart.id },
-//     });
-//     await cart.destroy();
+    const order = await Order.create({
+      coupon,
+      details,
+      storeId: cart.storeId,
+      userId: req.user.id,
+      user: req.user.toJSON(),
+      total,
+      deliveryAddress,
+      deliveryDate: new Date(),
+      paymentMethod,
+      products: cart.products.map(({ id, name, price, cartItem }) => ({
+        id,
+        name,
+        price,
+        count: cartItem.count,
+      })),
+    });
 
-//     res.status(httpStatus.CREATED).json({
-//       success: true,
-//       data: order,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    await Promise.all(
+      cart.products.map(async ({ id, cartItem }) => {
+        const product = await Product.findByPk(id);
+        product.stock -= cartItem.count;
+        return product.save();
+      })
+    );
 
-// export const updateOrder = async (req, res, next) => {
-//   const { storeId, orderId } = req.params;
-//   const { id: userId } = req.user;
-//   try {
-//     await Order.update(req.body, {
-//       where: { id: orderId, storeId },
-//     });
-//     res.status(httpStatus.OK).json({
-//       success: true,
-//       date: await Order.findByPk(orderId, {
-//         include: [User],
-//       }),
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+    await CartItem.destroy({
+      where: { cartId: cart.id },
+    });
+    await cart.destroy();
+
+    res.status(httpStatus.CREATED).json({
+      success: true,
+      data: order,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

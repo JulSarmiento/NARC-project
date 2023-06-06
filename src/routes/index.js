@@ -4,7 +4,6 @@ import httpStatus from "http-status";
 import userRouter from "./user.routes.js";
 import storeRouter from "./stores.routes.js";
 import productRouter from "./products.routes.js";
-import orderRouter from "./orders.routes.js";
 import categoryRouter from "./categories.routes.js";
 import subcategory from "./subcategories.routes.js"
 
@@ -21,7 +20,6 @@ router
   .use("/users", userRouter)
   .use("/stores", storeRouter)
   .use("/products", productRouter)
-  .use("/orders", orderRouter)
   .use("/categories", categoryRouter)
   .use("/subcategories", subcategory)
 

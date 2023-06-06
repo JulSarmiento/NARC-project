@@ -26,11 +26,11 @@ export const getStoreByParam = async (req, res, next) => {
 
     const store = isID(param)
       ? await Store.findByPk(param, {
-          include: [{ model: Category }],
+          include: [{ model: Category }, { model: Product }, { model: Order }],
         })
       : await Store.findOne({
           where: { name: { [Op.iLike]: param } },
-          include: [{ model: Category }],
+          include: [{ model: Category }, { model: Product }, { model: Order }],
         });
 
     res.status(httpStatus.OK).json({

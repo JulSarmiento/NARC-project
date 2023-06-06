@@ -84,8 +84,8 @@ export const createOrderSchema = Joi.object({
       "Shipped",
       "Delivered",
       "cancelled"
-    )
-    .required(),
+    ).
+    default("Pending").optional(),
   deliveryAddress: Joi.string().min(3).max(200).optional(),
   paymentMethod: Joi.string().valid("cash", "card").default("cash").optional(),
 });
@@ -100,7 +100,7 @@ export const updateOrderSchema = Joi.object({
       "Delivered",
       "cancelled"
     )
-    .optional(),
+    .required(),
 });
 
 // Cart and CartItem Schema

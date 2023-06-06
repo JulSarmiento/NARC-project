@@ -73,9 +73,10 @@ User.init(
       },
     },
     role: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
       defaultValue: true,
+      values: ["admin", "client", "seller"],
     },
     status: {
       type: DataTypes.BOOLEAN,

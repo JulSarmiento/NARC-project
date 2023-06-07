@@ -2,7 +2,16 @@ import { Model, DataTypes } from "sequelize";
 import {encryptPassword} from "../utils/auth.js";
 import sequelize from "../utils/postgresql.config.js";
 
-class User extends Model {}
+class User extends Model {
+  static login(email, password) {
+    return User.findOne({
+      where: {
+        email,
+        password: encryptPassword(password),
+      },
+    });
+  }
+}
 
 User.init(
   {
@@ -52,14 +61,15 @@ User.init(
       },
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [10, 16],
-        set(password) {
-          this.setDataValue('password', encryptPassword(password))
-        }
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'password',
+    validate: {
+      notNull: true,
+      set(password) {
+        this.setDataValue('password', encryptPassword(password))
       }
+    }
     },
     phone: {
       type: DataTypes.STRING,
@@ -79,10 +89,10 @@ User.init(
     role: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: true,
+      defaultValue: "client",
       values: ["admin", "client", "seller"],
     },
-    status: {
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,

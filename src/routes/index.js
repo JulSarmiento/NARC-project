@@ -18,11 +18,12 @@ router
       enviroment: process.env.ENVIRONMENT || "Not found",
     });
   })
+  .use("/auth", authRouter)
   .use("/users", userRouter)
   .use("/stores", storeRouter)
   .use("/products", productRouter)
   .use("/categories", categoryRouter)
   .use("/subcategories", subcategoryRouter)
-  .use("/login", authRouter);
+  
 
 export default router;

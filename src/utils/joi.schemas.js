@@ -14,8 +14,8 @@ export const createUserSchema = Joi.object({
     .required(),
   phone: Joi.string().min(9).max(10).required(),
   address: Joi.string().min(3).max(200).required(),
-  role: Joi.boolean().default(false).optional(),
-  status: Joi.boolean().required(true).optional(),
+  role: Joi.string().optional(),
+  active: Joi.boolean().optional(),
 });
 
 export const updateUserSchema = Joi.object({
@@ -31,8 +31,8 @@ export const updateUserSchema = Joi.object({
     .optional(),
   phone: Joi.string().min(9).max(10).optional(),
   address: Joi.string().min(3).max(200).optional(),
-  role: Joi.boolean().optional(),
-  status: Joi.boolean().optional(),
+  role: Joi.string().optional(),
+  active: Joi.boolean().optional(),
 });
 
 // Store Schema

@@ -1,18 +1,20 @@
 import httpStatus from "http-status";
 import JWT from "jsonwebtoken";
+import crypto from "crypto";
+
 import { User } from "../models/index.js";
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email, password} });
+    const user = await User.login(email, password);
 
     if (!user) {
       return res.status(httpStatus.NOT_FOUND).json({
-        message: "User not found",
+        message:  "User or password combination does not exists",
       });
-    }
+    };    
 
     const token = JWT.sign(
       { 

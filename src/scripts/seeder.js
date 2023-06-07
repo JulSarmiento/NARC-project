@@ -79,10 +79,10 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     lastname: "López",
     email: "carlosl@example.com",
     birthdate: "1998-09-20",
-    password: "abc123xyz",
+    password: "1234567",
     phone: "123456789",
     address: "Calle Principal 567, Ciudad, Departamento, Apartamento 404",
-    role: false,
+    role: "client",
     status: true
   });
 

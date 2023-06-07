@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+import {encryptPassword} from "../utils/auth.js";
 import sequelize from "../utils/postgresql.config.js";
 
 class User extends Model {}
@@ -54,8 +55,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 50],
-      },
+        len: [10, 16],
+        set(password) {
+          this.setDataValue('password', encryptPassword(password))
+        }
+      }
     },
     phone: {
       type: DataTypes.STRING,

@@ -3,6 +3,7 @@ import notPageFound from "./page.handler.js";
 import validateModel from "./joi.validator.js";
 import authentication from "./authentication.js";
 import rolValidator from "./rol.validator.js";
+import advanceSearch from "./advance.search.js";
 import {
   createUserSchema,
   updateUserSchema,
@@ -40,6 +41,7 @@ export {
   notPageFound,
   authentication,
   rolValidator,
+  advanceSearch,
   validateCreateUser,
   validateUpdateUser,
   validateCreateStore,

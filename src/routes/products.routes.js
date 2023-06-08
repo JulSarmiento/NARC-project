@@ -9,13 +9,14 @@ import {
 } from "../controllers/products.controller.js";
 import {
   rolValidator,
+  advanceSearch,
   validateCreateProduct,
   validateUpdateProduct,
 } from "../middlewares/index.js";
 
 const router = express.Router();
 
-router.get("/", [authentication], getProducts);
+router.get("/", [authentication, advanceSearch], getProducts);
 router.get("/:param", [authentication], getProductByParam);
 router.post("/", [authentication, rolValidator('seller'), validateCreateProduct], createProduct);
 router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateProduct], updateProduct);

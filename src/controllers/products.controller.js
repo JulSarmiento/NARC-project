@@ -4,11 +4,22 @@ import { Product, Store, Subcategory } from "../models/index.js";
 import { isID } from "../utils/isID.js";
 
 // GET all products
-export const getProducts = async (_req, res, next) => {
+export const getProducts = async (req, res, next) => {
   try {
+    console.log('req.where', req.where)
+   
     const products = await Product.findAll({
       include: [{ model: Store }, { model: Subcategory }],
+      where: req.where,
     });
+
+    if(products.length === 0) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        error: "Products not found",
+      });
+    }
+    
     res.status(httpStatus.OK).json({
       success: true,
       data: products,

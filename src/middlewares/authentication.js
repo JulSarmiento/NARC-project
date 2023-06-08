@@ -16,7 +16,7 @@ export default (req, res, next) => {
   
     const decodedToken = JWT.verify(token, process.env.JWT_SECRET);
   
-    if(!decodedToken || Object.keys(decodedToken).length === 0) {
+    if(!decodedToken ) {
       return res.status(httpStatus.UNAUTHORIZED).json({
         success: false,
         message: 'Invalid token',

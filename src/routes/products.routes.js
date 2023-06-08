@@ -1,4 +1,5 @@
 import express from "express";
+import { authentication } from "../middlewares/index.js";
 import {
   getProducts,
   getProductByParam,
@@ -7,16 +8,17 @@ import {
   deleteProduct,
 } from "../controllers/products.controller.js";
 import {
+  rolValidator,
   validateCreateProduct,
   validateUpdateProduct,
 } from "../middlewares/index.js";
 
 const router = express.Router();
 
-router.get("/", getProducts);
-router.get("/:param", getProductByParam);
-router.post("/", [validateCreateProduct], createProduct);
-router.patch("/:id", [validateUpdateProduct], updateProduct);
-router.delete("/:id", deleteProduct);
+router.get("/", [authentication], getProducts);
+router.get("/:param", [authentication], getProductByParam);
+router.post("/", [authentication, rolValidator('seller'), validateCreateProduct], createProduct);
+router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateProduct], updateProduct);
+router.delete("/:id", [authentication, rolValidator('seller')], deleteProduct);
 
 export default router;

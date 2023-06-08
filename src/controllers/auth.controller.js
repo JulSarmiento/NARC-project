@@ -1,6 +1,5 @@
 import httpStatus from "http-status";
 import JWT from "jsonwebtoken";
-import crypto from "crypto";
 
 import { User } from "../models/index.js";
 
@@ -18,7 +17,8 @@ export const login = async (req, res) => {
 
     const token = JWT.sign(
       { 
-        id: user.id 
+        id: user.id,
+        role: user.role, 
       }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });

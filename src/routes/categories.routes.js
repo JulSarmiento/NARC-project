@@ -1,6 +1,7 @@
 import express from "express";
-
+import { authentication } from "../middlewares/index.js";
 import {
+  rolValidator,
   validateCreateCategory,
   validateUpdateCategory,
 } from "../middlewares/index.js";
@@ -15,10 +16,10 @@ import {
 
 const router = express.Router();
 
-router.get("/", getCategories);
-router.get("/:categoryId", getCategoryById);
-router.post("/", [validateCreateCategory], createCategory);
-router.patch("/:categoryId", [validateUpdateCategory], updateCategory);
-router.delete("/:categoryId", deleteCategory);
+router.get("/", [authentication], getCategories);
+router.get("/:categoryId",[authentication, rolValidator('admin')], getCategoryById);
+router.post("/", [authentication, rolValidator('admin'), validateCreateCategory], createCategory);
+router.patch("/:categoryId", [authentication, rolValidator('admin'), validateUpdateCategory], updateCategory);
+router.delete("/:categoryId", [authentication, rolValidator('admin')], deleteCategory);
 
 export default router;

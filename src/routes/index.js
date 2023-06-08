@@ -7,6 +7,7 @@ import productRouter from "./products.routes.js";
 import categoryRouter from "./categories.routes.js";
 import subcategoryRouter from "./subcategories.routes.js";
 import authRouter from "./auth.routes.js";
+import profileRouter from "./profile.routes.js";
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router
     });
   })
   .use("/auth", authRouter)
+  .use("/profile", profileRouter)
   .use("/users", userRouter)
   .use("/stores", storeRouter)
   .use("/products", productRouter)

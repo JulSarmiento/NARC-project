@@ -6,7 +6,7 @@ export default (req, res, next) => {
   const { authorization } = req.headers;
 
   try {
-    if (!authorization || !authorization.startsWith('Bearer')) {
+    if (!authorization || !authorization.startsWith('Bearer ')) {
       return res.status(httpStatus.UNAUTHORIZED).json({
         message: 'Token not found',
       });
@@ -16,17 +16,20 @@ export default (req, res, next) => {
   
     const decodedToken = JWT.verify(token, process.env.JWT_SECRET);
   
-    if(!decodedToken) {
+    if(!decodedToken || Object.keys(decodedToken).length === 0) {
       return res.status(httpStatus.UNAUTHORIZED).json({
+        success: false,
         message: 'Invalid token',
       });
     }
-  
+
     req.user = decodedToken;
+    console.log("token decodificado", req.user);
   
     next();
   } catch (error) {
     return res.status(httpStatus.FORBIDDEN).json({
+      success: false,
       message: 'Access forbidden',
     });
   }

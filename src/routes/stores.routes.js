@@ -1,4 +1,5 @@
 import express from "express";
+import { authentication } from "../middlewares/index.js";
 import {
   getStores,
   createStore,
@@ -12,8 +13,8 @@ import {
   createOrder,
 } from "../controllers/orders.controller.js";
 import { getCart, addProductToCart } from "../controllers/cart.Controller.js";
-import authValidator from "../middlewares/auth.validator.js";
 import {
+  rolValidator,
   validateCreateStore,
   validateUpdateStore,
   validateCreateCart,
@@ -21,26 +22,18 @@ import {
 } from "../middlewares/index.js";
 const router = express.Router();
 
-router.get("/", getStores);
-router.get("/:param", getStoreByParam);
-router.post("/", [validateCreateStore], createStore);
-router.patch("/:id", [validateUpdateStore], updateStore);
-router.delete("/:id", deleteStore);
+router.get("/", [authentication, rolValidator('client')], getStores);
+router.get("/:param",[authentication, rolValidator('client')], getStoreByParam);
+router.post("/", [authentication, rolValidator('seller'), validateCreateStore], createStore);
+router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateStore], updateStore);
+router.delete("/:id", [authentication, rolValidator('seller')], deleteStore);
 
-router.get("/:storeId/cart", [authValidator], getCart);
-router.post(
-  "/:storeId/cart",
-  [authValidator, validateCreateCart],
-  addProductToCart
-);
+router.get("/:storeId/cart", [authentication, rolValidator('client')],getCart);
+router.post("/:storeId/cart", [authentication, rolValidator('client'), validateCreateCart], addProductToCart);
 
-router.get("/:storeId/orders", getOrders);
-router.get("/:storeId/orders/:orderId", [authValidator], getOrder);
-router.post(
-  "/:storeId/orders",
-  [authValidator, validateCreateOrder],
-  createOrder
-);
+router.get("/:storeId/orders", [authentication], getOrders);
+router.get("/:storeId/orders/:orderId", [authentication], getOrder);
+router.post("/:storeId/orders", [authentication,  validateCreateOrder], createOrder );
 
 
 export default router;

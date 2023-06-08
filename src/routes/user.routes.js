@@ -1,4 +1,5 @@
 import express from "express";
+import { authentication } from "../middlewares/index.js";
 import {
   getUsers,
   createUser,
@@ -8,16 +9,17 @@ import {
 } from "../controllers/users.controller.js";
 
 import {
+  rolValidator,
   validateCreateUser,
   validateUpdateUser,
 } from "../middlewares/index.js";
 
 const router = express.Router();
 
-router.get("/", getUsers);
-router.get("/:id", getUserById);
+router.get("/", [authentication, rolValidator('admin')], getUsers);
+router.get("/:id", [authentication, rolValidator('admin')], getUserById);
 router.post("/", [validateCreateUser], createUser);
-router.patch("/:id", [validateUpdateUser] ,updateUser);
-router.delete("/:id", deleteUser);
+router.patch("/:id", [authentication, rolValidator('client'), validateUpdateUser] ,updateUser);
+router.delete("/:id", [authentication, rolValidator('client')], deleteUser);
 
 export default router;

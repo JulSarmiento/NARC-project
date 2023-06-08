@@ -1,6 +1,8 @@
 import errorHandler from "./error.handler.js";
 import notPageFound from "./page.handler.js";
 import validateModel from "./joi.validator.js";
+import authentication from "./authentication.js";
+import rolValidator from "./rol.validator.js";
 import {
   createUserSchema,
   updateUserSchema,
@@ -16,6 +18,7 @@ import {
   updateOrderSchema,
   createCartSchema
 } from "../utils/joi.schemas.js";
+
 
 const validateCreateUser = validateModel(createUserSchema);
 const validateUpdateUser = validateModel(updateUserSchema);
@@ -35,6 +38,8 @@ const validateCreateCart = validateModel(createCartSchema);
 export { 
   errorHandler, 
   notPageFound,
+  authentication,
+  rolValidator,
   validateCreateUser,
   validateUpdateUser,
   validateCreateStore,

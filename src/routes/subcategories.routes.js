@@ -1,6 +1,7 @@
 import express from "express";
-
+import { authentication } from "../middlewares/index.js";
 import {
+  rolValidator,
   validateCreateSubcategory,
   validateUpdateSubcategory,
 } from "../middlewares/index.js";
@@ -14,9 +15,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", getSubCategories);
-router.patch("/:subcategoryId", [validateCreateSubcategory], updateSubCategory);
-router.post("/subcategoryId", [validateUpdateSubcategory], createSubCategory);
-router.delete("/:subcategoryId", deleteSubCategory);
+router.get("/",[authentication], getSubCategories);
+router.post("/subcategoryId", [authentication, rolValidator('admin'), validateUpdateSubcategory], createSubCategory);
+router.patch("/:subcategoryId", [authentication, rolValidator('admin'), validateCreateSubcategory], updateSubCategory);
+router.delete("/:subcategoryId", [authentication, rolValidator('admin')], deleteSubCategory);
 
 export default router;

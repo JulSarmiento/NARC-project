@@ -77,7 +77,7 @@ export const createOrder = async (req, res, next) => {
       details,
       storeId: cart.storeId,
       userId: req.user.id,
-      user: await User.findByPk(req.user.id),
+      user:  await User.findByPk(req.user.id, { attributes: ["name", "lastname", "email", "dni"] }),
       total,
       deliveryAddress,
       deliveryDate: new Date(),

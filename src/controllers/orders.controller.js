@@ -46,6 +46,8 @@ export const createOrder = async (req, res, next) => {
   const { storeId } = req.params;
   const { id: userId, address } = req.user;
 
+  console.log('req.user', req.user)
+
   let { coupon, details, deliveryAddress, paymentMethod } = req.body;
 
   try {
@@ -75,7 +77,7 @@ export const createOrder = async (req, res, next) => {
       details,
       storeId: cart.storeId,
       userId: req.user.id,
-      user: req.user.toJSON(),
+      user: await User.findByPk(req.user.id),
       total,
       deliveryAddress,
       deliveryDate: new Date(),

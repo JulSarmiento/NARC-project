@@ -41,7 +41,7 @@ Order.init({
   },
   deliveryAddress: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true,
   },
   deliveryDate: {
     type: DataTypes.DATE,

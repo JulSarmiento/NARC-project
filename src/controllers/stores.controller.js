@@ -15,12 +15,6 @@ export const getStores = async (req, res, next) => {
       offset
     });
 
-    if(stores.count === 0) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        success: false,
-        error: "Store not found",
-      });
-    }
     res.status(httpStatus.OK).json({
       success: true,
       data: stores,

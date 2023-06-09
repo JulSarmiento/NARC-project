@@ -16,13 +16,6 @@ export const getProducts = async (req, res, next) => {
       offset
     });
 
-    if(products.count === 0) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        success: false,
-        error: "Products not found",
-      });
-    }
-    
     res.status(httpStatus.OK).json({
       success: true,
       data: products,

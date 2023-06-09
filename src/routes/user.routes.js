@@ -10,6 +10,7 @@ import {
 
 import {
   rolValidator,
+  ageValidator,
   validateCreateUser,
   validateUpdateUser,
 } from "../middlewares/index.js";
@@ -18,7 +19,7 @@ const router = express.Router();
 
 router.get("/", [authentication, rolValidator('admin')], getUsers);
 router.get("/:id", [authentication, rolValidator('admin')], getUserById);
-router.post("/", [validateCreateUser], createUser);
+router.post("/", [ageValidator, validateCreateUser], createUser);
 router.patch("/:id", [authentication, rolValidator('client'), validateUpdateUser] ,updateUser);
 router.delete("/:id", [authentication, rolValidator('client')], deleteUser);
 

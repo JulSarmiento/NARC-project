@@ -7,7 +7,7 @@ export const getCart = async (req, res, next) => {
   const { id: userId } = req.user;
 
   try {
-    const cart = await Cart.findOne({
+    const [cart] = await Cart.findOrCreate({
       where: { userId, storeId },
       include: [Product],
     });

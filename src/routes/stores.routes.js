@@ -3,7 +3,7 @@ import { authentication } from "../middlewares/index.js";
 import {
   getStores,
   createStore,
-  getStoreByParam,
+  getStoreById,
   updateStore,
   deleteStore
 } from "../controllers/stores.controller.js";
@@ -15,6 +15,7 @@ import {
 import { getCart, addProductToCart } from "../controllers/cart.Controller.js";
 import {
   rolValidator,
+  advanceSearch,
   validateCreateStore,
   validateUpdateStore,
   validateCreateCart,
@@ -22,8 +23,8 @@ import {
 } from "../middlewares/index.js";
 const router = express.Router();
 
-router.get("/", [authentication, rolValidator('client')], getStores);
-router.get("/:param",[authentication, rolValidator('client')], getStoreByParam);
+router.get("/", [authentication, advanceSearch, rolValidator('client')], getStores);
+router.get("/:id",[authentication, rolValidator('client')], getStoreById);
 router.post("/", [authentication, rolValidator('seller'), validateCreateStore], createStore);
 router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateStore], updateStore);
 router.delete("/:id", [authentication, rolValidator('seller')], deleteStore);

@@ -1,18 +1,32 @@
 import httpStatus from "http-status";
-import { Op } from "sequelize";
-
 import { Store, Category, Order, Product } from "../models/index.js";
-import { isID } from "../utils/isID.js";
 
 // GET all stores
-export const getStores = async (_req, res, next) => {
+export const getStores = async (req, res, next) => {
   try {
-    const stores = await Store.findAll({
+
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const stores = await Store.findAndCountAll({
       include: [{ model: Category }],
+      where: req.where,
+      limit, 
+      offset
     });
+
+    if(stores.count === 0) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        success: false,
+        error: "Store not found",
+      });
+    }
     res.status(httpStatus.OK).json({
       success: true,
       data: stores,
+      totalItems: stores.count,
+      totalPages: Math.ceil(stores.count / limit),
+      currentPage: parseInt(page, 10),
     });
   } catch (error) {
     next(error);
@@ -20,27 +34,21 @@ export const getStores = async (_req, res, next) => {
 };
 
 // GET store by id or name
-export const getStoreByParam = async (req, res, next) => {
-  try {
-    const param = req.params.param;
-
-    const store = isID(param)
-      ? await Store.findByPk(param, {
-          include: [{ model: Category }, { model: Product }, { model: Order }],
-        })
-      : await Store.findOne({
-          where: { name: { [Op.iLike]: param } },
-          include: [{ model: Category }, { model: Product }, { model: Order }],
-        });
+export const getStoreById = async (req, res, next) => {
+  try{
+    const store = await Store.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Product }, { model: Order}],
+    });
 
     res.status(httpStatus.OK).json({
       success: true,
       data: store,
     });
-  } catch (error) {
-    next(error);
+    
+  } catch(err) {
+    next(err);
   }
-};
+}
 
 // POST new store
 export const createStore = async (req, res, next) => {

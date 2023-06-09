@@ -4,8 +4,8 @@ export default (req, _res, next) => {
   const where = {};
 
   Object.entries(req.query).forEach(([key, values]) => {
-      // offset
-    if (key === "page")  { 
+    // offset
+    if (key === "page") {
       where.offset = parseInt((req.query.page || 1, 10) - 1);
 
       // limit
@@ -13,28 +13,26 @@ export default (req, _res, next) => {
       where.limit = parseInt(req.query.size, 10);
 
       // in
-    } else if (key.includes('.')){
-      const modKey = `$${key}$`
+    } else if (key.includes(".")) {
+      const modKey = `$${key}$`;
       where[modKey] = {
         [Op.iLike]: `%${req.query[key]}%`,
-      };      
-
-    } else if(key.includes("__lte")) {
+      };
+    } else if (key.includes("__lte")) {
       where[key.replace("__lte", "")] = {
         [Op.lte]: req.query[key],
       };
-
     } else if (key.includes("__in")) {
       where[key.replace("__in", "")] = {
         [Op.in]: req.query[key].split(","),
       };
 
-        // contains
+      // contains
     } else if (key.includes("__contains")) {
       where[key.replace("__contains", "")] = {
         [Op.iLike]: `%${req.query[key]}%`,
-    };
-        
+      };
+
       // startWith
     } else if (key.includes("__startWith")) {
       where[key.replace("__startWith", "")] = {
@@ -46,11 +44,11 @@ export default (req, _res, next) => {
       where[key.replace("__endsWith", "")] = {
         [Op.endsWith]: `%${req.query[key]}`,
       };
-
     } else {
-      where[key] = req.query[key];
-    };
-
+      where[key] = where[key] = {
+        [Op.iLike]: `%${req.query[key]}%`,
+      };
+    }
   });
 
   req.where = where;

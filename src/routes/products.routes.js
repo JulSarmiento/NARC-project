@@ -2,7 +2,7 @@ import express from "express";
 import { authentication } from "../middlewares/index.js";
 import {
   getProducts,
-  getProductByParam,
+  getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -17,7 +17,7 @@ import {
 const router = express.Router();
 
 router.get("/", [authentication, advanceSearch], getProducts);
-router.get("/:param", [authentication], getProductByParam);
+router.get("/:param", [authentication], getProductById);
 router.post("/", [authentication, rolValidator('seller'), validateCreateProduct], createProduct);
 router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateProduct], updateProduct);
 router.delete("/:id", [authentication, rolValidator('seller')], deleteProduct);

@@ -3,6 +3,13 @@ import JWT from "jsonwebtoken";
 
 import { User } from "../models/index.js";
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ * @description Login a user
+ */
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -36,6 +43,13 @@ export const login = async (req, res) => {
 
 };
 
+/**
+ * 
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @description Register a user
+*/
 export const restricted = async (req, res) => {
   res.status(httpStatus.OK).json({
     success: true,

@@ -2,6 +2,15 @@ import httpStatus from "http-status";
 import { Op } from "sequelize";
 import { Cart, CartItem, Product } from "../models/index.js";
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns
+ * @description Get cart
+ * @example GET /api/v1/cart/:storeId
+ */
 export const getCart = async (req, res, next) => {
   const { storeId } = req.params;
   const { id: userId } = req.user;
@@ -21,6 +30,24 @@ export const getCart = async (req, res, next) => {
   }
 };
 
+/**
+ * 
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns
+ * @description Add product or delete a product to cart
+ * @example POST /api/v1/cart/:storeId
+ * {
+ *  "productId": 1,
+ *  "count": 1
+ * }
+ * @example DELETE /api/v1/cart/:storeId
+ * {
+ *  "productId": 1,
+ *  "count": 0
+ * }
+ */
 export const addProductToCart = async (req, res, next) => {
   const { storeId } = req.params;
   const { id: userId } = req.user;

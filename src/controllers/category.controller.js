@@ -1,6 +1,21 @@
 import httpStatus from "http-status";
 import { Category, Subcategory } from "../models/index.js";
 
+/**
+ * 
+ * @param {e.Request} _req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns
+ * @description Get all categories
+ * @example GET /api/v1/categories
+ * {
+ * "success": true,
+ * "data": [
+ * {
+ * "id": 1,
+ * }
+ */
 export const getCategories = async (_req, res, next) => {
   try {
     const categories = await Category.findAll({

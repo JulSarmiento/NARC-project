@@ -108,5 +108,5 @@ npm start
 |      Class    |   Parameter   |       Type     | Description                |
 |---------------| :------------ | :------------- | :------------------------- |
 |`Authorization`|               | `Bearer Token` | **Required**               |
-
+|`param`        | `userId`      | `Bearer Token` | **Required**               |
 

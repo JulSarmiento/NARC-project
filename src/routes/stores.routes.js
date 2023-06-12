@@ -29,6 +29,12 @@ router.post("/", [authentication, rolValidator('seller'), validateCreateStore], 
 router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateStore], updateStore);
 router.delete("/:id", [authentication, rolValidator('seller')], deleteStore);
 
+// router.get("/products", [authentication, advanceSearch], getProducts);
+// router.get("/products/:id", [authentication], getProductById);
+// router.post("/products", [authentication, rolValidator('seller'), validateCreateProduct], createProduct);
+// router.patch("/products/:id", [authentication, rolValidator('seller'), validateUpdateProduct], updateProduct);
+// router.delete("/products:id", [authentication, rolValidator('seller')], deleteProduct);
+
 router.get("/:storeId/cart", [authentication, rolValidator('client')],getCart);
 router.post("/:storeId/cart", [authentication, rolValidator('client'), validateCreateCart], addProductToCart);
 

@@ -2,7 +2,7 @@ import "dotenv/config";
 import app from './src/app.js';
 import sequelize from './src/utils/postgresql.config.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT_TO_USE || 3000;
 
 /**
  * @description Start server

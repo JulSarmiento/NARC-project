@@ -6,6 +6,15 @@
 
 The Ecommerce project is an API that manages an online store, allowing the administration of users with roles such as administrator, customer, and vendor. The application also provides functionalities for managing stores, products, shopping carts, and purchase orders. The project uses PostgreSQL as the database and interacts with it through the Sequelize ORM. The PostgreSQL database is hosted on the ElephantSQL platform.
 
+## Deployed URL 
+
+[NARC-ecommerce](https://api-m5lsjcu7ma-uc.a.run.app/health)
+
+
+## Secrete Manager
+
+[Secret Manager](https://console.cloud.google.com/security/secret-manager?hl=es&project=narc-e-commerce)
+
 ## Technologies Used
 
 - **dotenv**: A library that loads environment variables from a `.env` file to facilitate the configuration of variables in the development environment.

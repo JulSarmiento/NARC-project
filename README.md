@@ -69,8 +69,6 @@ DB_PASSWORD=mypassword
 npm start
 ```
 
-
-    
 ## Deployment
 
 To deploy this project run
@@ -89,9 +87,9 @@ To deploy this project run
   GET /users
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    | Parameter         |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 #### Get a User
@@ -99,10 +97,10 @@ To deploy this project run
   GET /users/${id}
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
-|`param`        | `userId`  | `uuid`         | **Required**               |
+|      Class    | Parameter         |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `userId`          | `uuid`         | **Required**               |
 
 
 #### Create User
@@ -110,48 +108,48 @@ To deploy this project run
   POST /users
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`body`         | `dni`         | `String`       | **Required**               |
-|`body`         | `name`        | `String`       | **Required**               |
-|`body`         | `lastname`    | `String`       | **Required**               |
-|`body`         | `email`       | `String`       | **Required**               |
-|`body`         | `birthdate`   | `Date`         | **Required**               |
-|`body`         | `password`    | `String`       | **Required**               |
-|`body`         | `phone`       | `String`       | **Required**               |
-|`body`         | `address`     | `String`       | **Required**               |
-|`body`         | `role`        | `String`       | **Required**               |
-|`body`         | `active`      | `Boolean`      | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`body`         | `dni`             | `String`       | **Required**               |
+|`body`         | `name`            | `String`       | **Required**               |
+|`body`         | `lastname`        | `String`       | **Required**               |
+|`body`         | `email`           | `String`       | **Required**               |
+|`body`         | `birthdate`       | `Date`         | **Required**               |
+|`body`         | `password`        | `String`       | **Required**               |
+|`body`         | `phone`           | `String`       | **Required**               |
+|`body`         | `address`         | `String`       | **Required**               |
+|`body`         | `role`            | `String`       | **Required**               |
+|`body`         | `active`          | `Boolean`      | **Required**               |
 
 #### Update User
 ```http
   PATCH /users/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `userId`      | `uuid`         | **Required**               |
-|`body`         | `dni`         | `String`       | **Optional**               |
-|`body`         | `name`        | `String`       | **Optional**               |
-|`body`         | `lastname`    | `String`       | **Optional**               |
-|`body`         | `email`       | `String`       | **Optional**               |
-|`body`         | `birthdate`   | `Date`         | **Optional**               |
-|`body`         | `password`    | `String`       | **Optional**               |
-|`body`         | `phone`       | `String`       | **Optional**               |
-|`body`         | `address`     | `String`       | **Optional**               |
-|`body`         | `role`        | `String`       | **Optional**               |
-|`body`         | `active`      | `Boolean`      | **Optional**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `userId`          | `uuid`         | **Required**               |
+|`body`         | `dni`             | `String`       | **Optional**               |
+|`body`         | `name`            | `String`       | **Optional**               |
+|`body`         | `lastname`        | `String`       | **Optional**               |
+|`body`         | `email`           | `String`       | **Optional**               |
+|`body`         | `birthdate`       | `Date`         | **Optional**               |
+|`body`         | `password`        | `String`       | **Optional**               |
+|`body`         | `phone`           | `String`       | **Optional**               |
+|`body`         | `address`         | `String`       | **Optional**               |
+|`body`         | `role`            | `String`       | **Optional**               |
+|`body`         | `active`          | `Boolean`      | **Optional**               |
 
 #### Delete User
 ```http
   DELETE /users/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `userId`      | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `userId`          | `uuid`         | **Required**               |
 
 
 ### Stores
@@ -161,20 +159,20 @@ To deploy this project run
   GET /stores
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 #### Get Store
 ```http
-  GET /stores/${id}
+  GET /stores/:id 
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
-|`param`        | `storeId` | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `storeId`         | `uuid`         | **Required**               |
 
 
 #### Create Store
@@ -182,12 +180,12 @@ To deploy this project run
   POST /stores
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`body`         | `name`        | `String`       | **Required**               |
-|`body`         | `image`       | `String`       | **Required**               |
-|`body`         | `categoryId`  | `String`       | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`body`         | `name`            | `String`       | **Required**               |
+|`body`         | `image`           | `String`       | **Required**               |
+|`body`         | `categoryId`      | `String`       | **Required**               |
 
 
 #### Update Store
@@ -195,46 +193,46 @@ To deploy this project run
   PATCH /stores/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `storeId`     | `uuid`         | **Required**               |
-|`body`         | `name`        | `String`       | **Optional**               |
-|`body`         | `image`       | `String`       | **Optional**               |
-|`body`         | `categoryId`  | `String`       | **Optional**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `storeId`         | `uuid`         | **Required**               |
+|`body`         | `name`            | `String`       | **Optional**               |
+|`body`         | `image`           | `String`       | **Optional**               |
+|`body`         | `categoryId`      | `String`       | **Optional**               |
 
 #### Delete Store
 ```http
   DELETE /stores/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `storeId`     | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `storeId`         | `uuid`         | **Required**               |
 
 
 ### Products
 
 #### Get all Products
 ```http
-  GET /stores/products
+  GET /stores/:storeId/products
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 #### Get a Product
 ```http
-  GET /stores/products/:id
+  GET /stores/:storeId/products/:id
 ```
 
-|      Class    | Parameter     |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `productId`   | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `productId`       | `uuid`         | **Required**               |
 
 
 #### Create a Product
@@ -255,7 +253,7 @@ To deploy this project run
 |`body`         | `subcategoryId`   | `uuid`         | **Required**               |
 
 
-#### Update Store
+#### Update a Product
 ```http
   PATCH /stores/:id/products/:id
 ```
@@ -278,11 +276,11 @@ To deploy this project run
   DELETE /stores/:id/products/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `storeId`     | `uuid`         | **Required**               |
-|`param`        | `productId`   | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `storeId`         | `uuid`         | **Required**               |
+|`param`        | `productId`       | `uuid`         | **Required**               |
 
 
 ### Categories
@@ -292,9 +290,9 @@ To deploy this project run
   GET /categories
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    |    Parameter      |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 #### Get a Category
@@ -302,10 +300,10 @@ To deploy this project run
   GET /categories/:id
 ```
 
-|      Class    | Parameter     |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `categoryid`  | `uuid`         | **Required**               |
+|      Class    | Parameter         |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `categoryid`      | `uuid`         | **Required**               |
 
 
 #### Create a Category
@@ -336,10 +334,10 @@ To deploy this project run
   DELETE /categories/:id
 ```
 
-|      Class    |   Parameter   |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `categoryId`  | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `categoryId`      | `uuid`         | **Required**               |
 
 
 ### Subcategories
@@ -349,9 +347,9 @@ To deploy this project run
   GET /categories/subcategories
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 
@@ -397,9 +395,9 @@ To deploy this project run
   GET /stores/:storeId/orders
 ```
 
-|      Class    | Parameter |       Type     | Description                |
-|---------------| :-------- | :------------- | :------------------------- |
-|`Authorization`|           | `Bearer Token` | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
 
 
 #### Get a Order by a Store from a User
@@ -407,12 +405,12 @@ To deploy this project run
   GET /stores/:storeId/orders/:id
 ```
 
-|      Class    | Parameter     |       Type     | Description                |
-|---------------| :------------ | :------------- | :------------------------- |
-|`Authorization`|               | `Bearer Token` | **Required**               |
-|`param`        | `storeId`     | `uuid`         | **Required**               |
-|`param`        | `orderId`     | `uuid`         | **Required**               |
-|`query`        | `userId`      | `uuid`         | **Required**               |
+|      Class    |   Parameter       |       Type     | Description                |
+|---------------| :---------------- | :------------- | :------------------------- |
+|`Authorization`|                   | `Bearer Token` | **Required**               |
+|`param`        | `storeId`         | `uuid`         | **Required**               |
+|`param`        | `orderId`         | `uuid`         | **Required**               |
+|`query`        | `userId`          | `uuid`         | **Required**               |
 
 
 #### Create a Order

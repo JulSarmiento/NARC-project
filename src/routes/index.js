@@ -3,7 +3,7 @@ import httpStatus from "http-status";
 
 import userRouter from "./user.routes.js";
 import storeRouter from "./stores.routes.js";
-import productRouter from "./products.routes.js";
+// import productRouter from "./products.routes.js";
 import categoryRouter from "./categories.routes.js";
 import subcategoryRouter from "./subcategories.routes.js";
 import authRouter from "./auth.routes.js";
@@ -23,7 +23,7 @@ router
   .use("/profile", profileRouter)
   .use("/users", userRouter)
   .use("/stores", storeRouter)
-  .use("/products", productRouter)
+  // .use("/products", productRouter)
   .use("/categories", categoryRouter)
   .use("/subcategories", subcategoryRouter)
   

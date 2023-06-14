@@ -1,14 +1,18 @@
 {
-  "rewrites": [
-    {
-      "source": ".",
-      "function": "narc-ecommerce"
-    }
-  ],
+  "hosting": {
+    "public": "public",
+    "rewrites": [
+      {
+        "source": "/api",
+        "region": "us-central1",
+        "function": "api"
+      }
+    ]
+  },
   "functions": [
     {
       "source": ".",
-      "codebase": "narc-ecommerce",
+      "codebase": "default",
       "ignore": [
         "node_modules",
         ".git",

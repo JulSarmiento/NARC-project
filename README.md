@@ -8,7 +8,11 @@ The Ecommerce project is an API that manages an online store, allowing the admin
 
 ## Deployed URL 
 
-[NARC-ecommerce](https://api-m5lsjcu7ma-uc.a.run.app/health)
+[NARC-ecommerce](https://narc-ecommerce.lat)
+
+## Google Service Account
+
+[Google Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts/details/101832751034889941786/keys?hl=es&project=narc-e-commerce)
 
 
 ## Secrete Manager

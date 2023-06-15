@@ -1,32 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Welcome to Narc API!</title>
-  <style>
-    pre {
-      font-family: monospace;
-      font-size: 12px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Welcome to Narc API!</h1>
-  <pre>
+  <head>
+    <title>Welcome to Narc API!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #f5f5f5;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .logo {
+        width: 200px;
+        height: auto;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .link {
+        color: #007bff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <img
+        class="logo"
+        src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png"
+        alt="Logo" />
+      <h1>NARC E-commerce</h1>
+    </header>
+    <pre>
       .-"-.
      /|6 6|\
     {/(_0_)\}
      _/ ^ \_
     (/ /^\ \)-'
      ""' '""
-  </pre>
-  <p>
-    Thank you for choosing Narc API! Our service provides powerful tools for data analysis and processing. Whether you're looking to extract insights from large datasets or perform complex calculations, Narc API has got you covered.
-  </p>
-  <p>
-    To get started, please refer to our API documentation for instructions on how to make requests and utilize our features effectively.
-  </p>
-  <p>
-    If you have any questions or need assistance, don't hesitate to reach out to our support team. We're here to help you make the most of Narc API and achieve your data-driven goals.
-  </p>
-</body>
+  </pre
+    >
+    <div class="container">
+      <section>
+        <h2 class="section-title">Deployed URL</h2>
+        <a class="link" href="https://narc-ecommerce.lat">NARC-ecommerce</a>
+      </section>
+
+      <section>
+        <h2 class="section-title">Google Service Account</h2>
+        <a
+          class="link"
+          href="https://console.cloud.google.com/iam-admin/serviceaccounts/details/101832751034889941786/keys?hl=es&project=narc-e-commerce"
+          >Google Service Account</a
+        >
+      </section>
+
+      <section>
+        <h2 class="section-title">Secret Manager</h2>
+        <a
+          class="link"
+          href="https://console.cloud.google.com/security/secret-manager?hl=es&project=narc-e-commerce"
+          >Secret Manager</a
+        >
+      </section>
+
+      <section>
+        <h2 class="section-title">Technologies Used</h2>
+        <ul>
+          <li>dotenv</li>
+          <li>express</li>
+          <li>http-status</li>
+          <li>joi</li>
+          <li>jsonwebtoken</li>
+          <li>morgan</li>
+          <li>nodemon</li>
+          <li>pg</li>
+          <li>pg-hstore</li>
+          <li>sequelize</li>
+          <li>@types/express</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-title">Environment Variables</h2>
+        <ul>
+          <li>PORT</li>
+          <li>ENVIRONMENT</li>
+          <li>POSTGRES_PASSWORD</li>
+          <li>POSTGRES_DB</li>
+          <li>JWT_SECRET</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="section-title">Installation</h2>
+        <pre>
+        <code>git clone &lt;repository-url&gt;</code>
+        <code>npm install</code>
+        <code># Configure environment variables creating a .env file in the root directory and add this environment variables.</code>
+        <code>DB_HOST=localhost</code>
+        <code>DB_PORT=5432</code>
+        <code>DB_USER=myuser</code>
+        <code>DB_PASSWORD=mypassword</code>
+        <code>npm start</code>
+      </pre>
+      </section>
+
+      <section>
+        <h2 class="section-title">Deployment</h2>
+        <pre>
+        <code>npm run deploy</code>
+      </pre>
+      </section>
+    </div>
+  </body>
 </html>

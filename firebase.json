@@ -3,7 +3,7 @@
     "public": "public",
     "rewrites": [
       {
-        "source": "/api",
+        "source": "**",
         "region": "us-central1",
         "function": "api"
       }

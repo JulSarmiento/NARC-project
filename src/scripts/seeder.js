@@ -189,6 +189,19 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     status: true
   });
 
+  const userClient2 = await User.create({
+    dni: '9876543210',
+    name: 'Ana',
+    lastname: 'García',
+    email: 'ana@example.com',
+    birthdate: '1995-05-15',
+    password: 'password123',
+    phone: '987654321',
+    address: 'Calle Principal 123, Ciudad, Departamento',
+    role: 'client',
+    status: true,
+  });
+
   const userSeller = await User.create({
     dni: '2468135790',
     name: 'Juan',
@@ -202,12 +215,32 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     status: true,
   });
 
+  const sellerUser2 = await User.create({
+    dni: '2468135790',
+    name: 'Pedro',
+    lastname: 'Martínez',
+    email: 'pedro@example.com',
+    birthdate: '1980-10-01',
+    password: 'password456',
+    phone: '987654321',
+    address: 'Calle Secundaria 456, Ciudad, Departamento',
+    role: 'seller',
+    status: true,
+  });
+
   console.log("> User created");
   console.table(userClient.dataValues);
+  console.table(userClient2.dataValues);
   console.table(userSeller.dataValues);
+  console.table(sellerUser2.dataValues);
 
   const cart = await Cart.create({
     userId: userClient.id,
+    storeId: store.id
+  });
+
+  const cart2 = await Cart.create({
+    userId: userClient2.id,
     storeId: store.id
   });
 
@@ -215,6 +248,7 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
 
   console.log("> Cart created");
   console.table(cart.dataValues);
+  console.table(cart2.dataValues);
 
   await sequelize.close();
 

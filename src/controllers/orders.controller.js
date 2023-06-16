@@ -20,7 +20,6 @@ export const getOrders = async (req, res, next) => {
 
 export const getOrder = async (req, res, next) => {
   const { storeId, orderId } = req.params;
-  const { id: userId } = req.user;
   try {
     const order = await Order.findOne({
       where: { id: orderId, storeId },
@@ -48,7 +47,9 @@ export const createOrder = async (req, res, next) => {
 
   console.log('req.user', req.user)
 
-  let { coupon, details, deliveryAddress, paymentMethod } = req.body;
+  const user = await User.findByPk(userId);
+
+   let { coupon, details, deliveryAddress, paymentMethod } = req.body;
 
   try {
     if(!deliveryAddress){
@@ -76,10 +77,14 @@ export const createOrder = async (req, res, next) => {
       coupon,
       details,
       storeId: cart.storeId,
-      userId: req.user.id,
-      user:  await User.findByPk(req.user.id, { attributes: ["name", "lastname", "email", "dni"] }),
+      userId: user.id,
+      user: {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+      },
       total,
-      deliveryAddress,
+      deliveryAddress: deliveryAddress || user.address,
       deliveryDate: new Date(),
       paymentMethod,
       products: cart.products.map(({ id, name, price, cartItem }) => ({

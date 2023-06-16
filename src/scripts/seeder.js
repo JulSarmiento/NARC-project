@@ -57,10 +57,24 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     image: "https://picsum.photos/200",
   });
 
+  const store2 = await Store.create({
+    name: 'Fashion Boutique',
+    categoryId: categories[2].id,
+    image: 'https://picsum.photos/200',
+  });
+  
+  const store3 = await Store.create({
+    name: 'Electronics World',
+    categoryId: categories[1].id,
+    image: 'https://picsum.photos/200',
+  });
+
   console.log("> Store created");
   console.table(store.dataValues);
+  console.table(store2.dataValues);
+  console.table(store3.dataValues);
 
-  const product = await Product.create({
+  const product1 = await Product.create({
     name: "Arroz",
     description: "Tienda de la esquina",
     image: "https://picsum.photos/200",
@@ -70,10 +84,99 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     storeId: store.id,
   });
 
-  console.log("> Product created");
-  console.table(product.dataValues);
+  const product2 = await Product.create({
+    name: 'Leche',
+    description: 'Producto lácteo',
+    image: 'https://picsum.photos/200',
+    price: 500,
+    stock: 50,
+    subcategoryId: subcategories[0][0].id,
+    storeId: store.id,
+  });
+  
+  const product3 = await Product.create({
+    name: 'Pan',
+    description: 'Pan fresco del día',
+    image: 'https://picsum.photos/200',
+    price: 200,
+    stock: 20,
+    subcategoryId: subcategories[0][0].id,
+    storeId: store.id,
+  });
 
-  const user = await User.create({
+  const product4 = await Product.create({
+    name: 'Camiseta',
+    description: 'Camiseta de algodón para hombre',
+    image: 'https://picsum.photos/200',
+    price: 1500,
+    stock: 30,
+    subcategoryId: subcategories[1][0].id,
+    storeId: store2.id,
+  });
+  
+  const product5 = await Product.create({
+    name: 'Pantalón',
+    description: 'Pantalón vaquero para mujer',
+    image: 'https://picsum.photos/200',
+    price: 2500,
+    stock: 20,
+    subcategoryId: subcategories[1][0].id,
+    storeId: store2.id,
+  });
+  
+  const product6 = await Product.create({
+    name: 'Vestido',
+    description: 'Vestido elegante para ocasiones especiales',
+    image: 'https://picsum.photos/200',
+    price: 3500,
+    stock: 15,
+    subcategoryId: subcategories[1][0].id,
+    storeId: store2.id,
+  });
+
+  const product7 = await Product.create({
+    name: 'Laptop',
+    description: 'Laptop de última generación con procesador i7',
+    image: 'https://picsum.photos/200',
+    price: 50000,
+    stock: 10,
+    subcategoryId: subcategories[2][0].id,
+    storeId: store3.id,
+  });
+  
+  const product8 = await Product.create({
+    name: 'Smartphone',
+    description: 'Teléfono inteligente con cámara de alta resolución',
+    image: 'https://picsum.photos/200',
+    price: 25000,
+    stock: 20,
+    subcategoryId: subcategories[2][0].id,
+    storeId: store3.id,
+  });
+  
+  const product9 = await Product.create({
+    name: 'Auriculares inalámbricos',
+    description: 'Auriculares con cancelación de ruido y conexión Bluetooth',
+    image: 'https://picsum.photos/200',
+    price: 5000,
+    stock: 50,
+    subcategoryId: subcategories[2][0].id,
+    storeId: store3.id,
+  });
+
+  console.log("> Product created");
+  console.table(product1.dataValues);
+  console.table(product2.dataValues);
+  console.table(product3.dataValues);
+  console.table(product4.dataValues);
+  console.table(product5.dataValues);
+  console.table(product6.dataValues);
+  console.table(product7.dataValues);
+  console.table(product8.dataValues);
+  console.table(product9.dataValues);
+    
+
+  const userClient = await User.create({
     dni: "1357924680",
     name: "Carlos",
     lastname: "López",
@@ -86,15 +189,29 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     status: true
   });
 
+  const userSeller = await User.create({
+    dni: '2468135790',
+    name: 'Juan',
+    lastname: 'Pérez',
+    email: 'juanp@example.com',
+    birthdate: '1990-05-15',
+    password: 'password123',
+    phone: '987654321',
+    address: 'Avenida Principal 123, Ciudad, Departamento',
+    role: 'seller',
+    status: true,
+  });
+
   console.log("> User created");
-  console.table(user.dataValues);
+  console.table(userClient.dataValues);
+  console.table(userSeller.dataValues);
 
   const cart = await Cart.create({
-    userId: user.id,
+    userId: userClient.id,
     storeId: store.id
   });
 
-  await cart.addProduct(product, { through: { count: 2 } }  )
+  await cart.addProduct(product1, { through: { count: 2 } }  )
 
   console.log("> Cart created");
   console.table(cart.dataValues);

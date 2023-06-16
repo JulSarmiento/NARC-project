@@ -1,0 +1,1126 @@
+{
+	"info": {
+		"_postman_id": "2687a0f8-afa4-4628-9085-2a072704f462",
+		"name": "NARC-ecommerce",
+		"description": "The Ecommerce project is an API that manages an online store, allowing the administration of users with roles such as administrator, customer, and vendor. The application also provides functionalities for managing stores, products, shopping carts, and purchase orders. The project uses PostgreSQL as the database and interacts with it through the Sequelize ORM. The PostgreSQL database is hosted on the ElephantSQL platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12454930",
+		"_collection_link": "https://universal-eclipse-889853.postman.co/workspace/50a41d66-69dd-4b17-8c27-404953806c10/collection/12454930-2687a0f8-afa4-4628-9085-2a072704f462?action=share&creator=12454930&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Users Endpoints",
+			"item": [
+				{
+					"name": "GET all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjYxMzU3MiwiZXhwIjoxNjg2NjE1MzcyfQ.i8xiVOZTUHpuhE-DQK195jOdd6DKlSPb_orK6x4rChs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| `Authorization` |  | `Bearer Token` | Retrieves all users | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful response |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET a user by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlMDIyMTg4LWY5YzAtNDIzMi1iMTA4LTRhNTA4MjRlZDc2MSIsImlhdCI6MTY4NjE4ODY5NywiZXhwIjoxNjg2Mjc1MDk3fQ.7UyUXxYmRoxt2AtgtaTFLB3Ec3DSzt3nLBmnU6Ma7-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/c1aac6b9-716a-4403-b269-b8c7827baa7b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"c1aac6b9-716a-4403-b269-b8c7827baa7b"
+							]
+						},
+						"description": "| **Class** | **Parameter** | **Type** | **Description** | **Required** |\n| --- | --- | --- | --- | --- |\n| Authorization | \\- | Bearer Token | Bearer token for authentication | Yes |\n| Param | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful response |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Create a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dni\": \"1234567897\",\r\n  \"name\": \"Julie Admin\",\r\n  \"lastname\": \"Sarmiento\",\r\n  \"email\": \"juliadmin@example.com\",\r\n  \"birthdate\": \"1997-05-10\",\r\n  \"password\": \"123456\",\r\n  \"phone\": \"987654321\",\r\n  \"address\": \"Avenida Principal 123, Ciudad, Departamento, Apartamento 202\",\r\n  \"role\": \"admin\",\r\n  \"active\": true\r\n}\r\n\r\n//   \"DNI\": \"1234567894\",\r\n//   \"NAME\": \"JULIETH ADMIN\",\r\n//   \"LASTNAME\": \"SARMIENTO\",\r\n//   \"EMAIL\": \"ADMIN@EXAMPLE.COM\",\r\n//   \"BIRTHDATE\": \"1995-05-10\",\r\n//   \"PASSWORD\": \"1234567\",\r\n//   \"PHONE\": \"987654321\",\r\n//   \"ADDRESS\": \"AVENIDA PRINCIPAL 123, CIUDAD, DEPARTAMENTO, APARTAMENTO 202\",\r\n//   \"ROLE\": \"ADMIN\",\r\n//   \"ACTIVE\": TRUE\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "| **Class** | **Parameter** | **Type** | **Description** | **Required** |\n| --- | --- | --- | --- | --- |\n| Body | dni | String | User's DNI (Document Number) | Yes |\n| Body | name | String | User's name | Yes |\n| Body | lastname | String | User's last name | Yes |\n| Body | email | String | User's email address | Yes |\n| Body | birthday | Date | User's date of birth | Yes |\n| Body | password | String | User's password | Yes |\n| Body | phone | String | User's phone number | Yes |\n| Body | address | String | User's address | Yes |\n| Body | role | String | User's role | Yes |\n| Body | active | Boolean | Indicator if user is active | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | User created successfully |\n| 400 | Bad request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH a user by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"julisar@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/36000090-dd0a-4b6f-bb49-5cef03e59773",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"36000090-dd0a-4b6f-bb49-5cef03e59773"
+							]
+						},
+						"description": "| **Class** | **Parameter** | **Type** | **Description** | **Required** |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| param | userId | uudi | User ID | Yes |\n| Body | dni | String | User's DNI (Document Number) | No |\n| Body | name | String | User's name | No |\n| Body | lastname | String | User's last name | No |\n| Body | email | String | User's email address | No |\n| Body | birthday | Date | User's date of birth | No |\n| Body | password | String | User's password | No |\n| Body | phone | String | User's phone number | No |\n| Body | address | String | User's address | No |\n| Body | role | String | User's role | No |\n| Body | active | Boolean | Indicator if user is active | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | User updated successfully |\n| 400 | Bad request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a user by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/13c98380-a443-46ca-9fa1-6b8b185ab967",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"13c98380-a443-46ca-9fa1-6b8b185ab967"
+							]
+						},
+						"description": "| **Class** | **Parameter** | **Type** | **Description** | **Required** |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 204 | User deleted successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The user endpoints allow you to perform operations such as registering new users, authenticating existing users, retrieving user details, and updating user information."
+		},
+		{
+			"name": "Stores Endpoints",
+			"item": [
+				{
+					"name": "GET all stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stores",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores"
+							]
+						},
+						"description": "| **Class** | **Parameter** | **Type** | **Description** | **Required** |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful response |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET a store by name or ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stores/479bd2c5-d021-450c-a349-f73c85505c95",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"479bd2c5-d021-450c-a349-f73c85505c95"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | User updated successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Create a new store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Los trapitos de Vader\",\r\n  \"image\": \"https://example.com/ropa.jpg\",\r\n  \"categoryId\": \"c8af74bc-4f11-485a-8cc0-9e4841927d28\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/stores",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Body | name | String | Store name | Yes |\n| Body | image | String | Store image | Yes |\n| Body | categoryId | String | Store category ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Store created successfully |\n| 400 | Bad request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH a store by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Los trapitos de Habib\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/stores/8dfbc4e2-1e27-4982-9bbc-18cbea0613de",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"8dfbc4e2-1e27-4982-9bbc-18cbea0613de"
+							]
+						},
+						"description": "StartFragment\n\n| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Body | name | String | Store name | No |\n| Body | image | String | Store image | No |\n| Body | categoryId | String | Store category ID | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Store updated successfully |\n| 400 | Bad request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a store by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Los trapitos de Habib\",\r\n    \"categoryId\": \"28a90aef-b7d7-4a74-bbd0-4dbff017541d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/stores/23ab9b9c-1176-4bdd-ac46-8a76f2f94d76",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"23ab9b9c-1176-4bdd-ac46-8a76f2f94d76"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 204 | Store deleted successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The store endpoints provide functionalities for managing stores. You can create new stores, retrieve a list of all stores, view details of a specific store, update store information, and delete stores. These endpoints allow you to perform actions related to the management and administration of individual stores within the application."
+		},
+		{
+			"name": "Products for Store Endpoints",
+			"item": [
+				{
+					"name": "GET all products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Njg1NjQxMCwiZXhwIjoxNjg2ODU4MjEwfQ.E6wmr348W93lUM759zuSnp9Q5lxS2QCuXvkKE3Dzgzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request - Invalid access token |\n| 403 | Forbidden - User does not have permission to access the resource |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all products from a store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Njg1NjQxMCwiZXhwIjoxNjg2ODU4MjEwfQ.E6wmr348W93lUM759zuSnp9Q5lxS2QCuXvkKE3Dzgzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stores/bec11fa-029b-49ca-a321-c482a78d3e25/products?name=arroz",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"bec11fa-029b-49ca-a321-c482a78d3e25",
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "arroz"
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET a product by name or ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products/arroz tres delicias frito",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products",
+								"arroz tres delicias frito"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Param | id | uuid | Product ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST a new products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Papa\",\r\n  \"description\": \"es una papa.\",\r\n  \"price\": 10,\r\n  \"stock\": 20,\r\n  \"image\": \"https://example.com/images/collar.jpg\",\r\n  \"storeId\": \"9bec11fa-029b-49ca-a321-c482a78d3e25\",\r\n  \"subcategoryId\": \"662a9319-51b7-47c8-ae85-a135441edeac\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/store/9bec11fa-029b-49ca-a321-c482a78d3e25/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"store",
+								"9bec11fa-029b-49ca-a321-c482a78d3e25",
+								"products"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Body | name | String | Product name | Yes |\n| Body | description | String | Product description | Yes |\n| Body | price | Number | Product price | Yes |\n| Body | stock | Number | Product stock | Yes |\n| Body | image | String | URL to product picture | Yes |\n| Body | storeId | uuid | Store ID | Yes |\n| Body | subcategoryId | uuid | Subcategory ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Product created successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE a product by  ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Camisa de manga larga color azul rey\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/products/7cf3f8c5-70ab-4f7f-a784-8ad5f5eef2e3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products",
+								"7cf3f8c5-70ab-4f7f-a784-8ad5f5eef2e3"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Body | name | String | Product name | No |\n| Body | description | String | Product description | No |\n| Body | price | Number | Product price | No |\n| Body | stock | Number | Product stock | No |\n| Body | image | String | URL to product picture | No |\n| Body | storeId | uuid | Store ID | No |\n| Body | subcategoryId | uuid | Subcategory ID | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Product updated successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a product by  ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products6f1a8118-b37c-434d-a502-e241b716beb4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products6f1a8118-b37c-434d-a502-e241b716beb4"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Body | productId | uuid | Product ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 204 | Product deleted successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The product endpoints provide functionalities related to product management. You can retrieve a list of all products, view details of a specific product, create new products, update product information, and delete existing products."
+		},
+		{
+			"name": "Cart Endpoints",
+			"item": [
+				{
+					"name": "GET a cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/cart?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "b50becd2-67b3-4088-8438-082be1814415"
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST a product in a cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"a819af22-612c-4cb5-8380-78f54b5c04a6\",\n    \"count\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/cart?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "b50becd2-67b3-4088-8438-082be1814415"
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n| Body | productId | uuid | Product ID | Yes |\n| Body | count | Number | Product quantity | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The cart endpoints enable you to manage the user's shopping cart. You can add products to the cart, view the cart contents, update quantities of products in the cart, and remove products from the cart."
+		},
+		{
+			"name": "Orders Endpoints",
+			"item": [
+				{
+					"name": "GET all orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"orders"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET a order by store from a user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stores/8dfbc4e2-1e27-4982-9bbc-18cbea0613de/orders/71016c1d-6057-4bf4-8fc9-d165cce2f16a?userId=c1aac6b9-716a-4403-b269-b8c7827baa7b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"8dfbc4e2-1e27-4982-9bbc-18cbea0613de",
+								"orders",
+								"71016c1d-6057-4bf4-8fc9-d165cce2f16a"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "c1aac6b9-716a-4403-b269-b8c7827baa7b"
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Param | orderId | uuid | Order ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST a new order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"details\": \"No details\",\n    \"paymentMethod\": \"card\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/orders?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stores",
+								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "b50becd2-67b3-4088-8438-082be1814415"
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n| Body | coupon | Number | Promotinal value | No |\n| Body | details | String | Orders details | Yes |\n| Body | status | String | Order status | Yes |\n| Body | deliveryAddress | String | Users address or a new one | No |\n| Body | paymentMethod | String | Payment method | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Order created successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The order endpoints allow you to manage store orders. You can retrieve a list of orders from a specific store, view details of a specific order placed by a user in a store, create new orders, and update order information such as status, delivery address, and payment method."
+		},
+		{
+			"name": "Categories Endpoints",
+			"item": [
+				{
+					"name": "GET all the categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Operation successfully |\n| 401 | Unauthorized request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "GET a category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/495fec6d-99c0-487b-b68e-5e4ecf89bd49",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"495fec6d-99c0-487b-b68e-5e4ecf89bd49"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | categoryId | uuid | Category ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Operation successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Category not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST a category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMzMTExNCwiZXhwIjoxNjg2MzMyOTE0fQ.rBs-LJiGQ4ZYEXfyeUfNUk3lxUJCJWvPLvSj3cM5B1M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Licores\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Body | name | String | Category name | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Category created successfully |\n| 400 | Bad request |\n| 401 | Unauthorized request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE a category by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Licoreria/Vapeadores\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/1e41d96d-263f-4010-8c23-c09ff950a72f",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"1e41d96d-263f-4010-8c23-c09ff950a72f"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | categoryId | uuid | Category ID | Yes |\n| Body | name | String | Category name | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Category updated successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Category not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a category by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Licoreria/Vapeadores\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/1e41d96d-263f-4010-8c23-c09ff950a72f",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"1e41d96d-263f-4010-8c23-c09ff950a72f"
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | categoryId | uuid | Category ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 204 | Category deleted successfully |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Category not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The categories endpoints allow you to manage product categories within the application. You can retrieve a list of all categories, get details of a specific category, create new categories, update existing categories, and delete categories. These endpoints provide functionalities for organizing and categorizing products based on their characteristics or attributes."
+		},
+		{
+			"name": "Subcategories Endpoints",
+			"item": [
+				{
+					"name": "GET all the subcategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/subcategories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subcategories"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "e92ec417-0df1-44c1-8461-2c1be51891d9",
+									"disabled": true
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Operation successfully |\n| 401 | Unauthorized request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "POST a subcategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Barbie backend developer\",\r\n    \"categoryId\": \"bf8c7cca-6d79-4a41-936e-4758ecf3e084\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/subcategories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"subcategories"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "e92ec417-0df1-44c1-8461-2c1be51891d9",
+									"disabled": true
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Body | name | String | Subcategory ID | Yes |\n| Body | categoryId | uuid | Category ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Subcategory created successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE a subcategory by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Calzado dama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/subcategories/8abcefcd-1baf-442b-a56f-e42caa40a5fe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"subcategories",
+								"8abcefcd-1baf-442b-a56f-e42caa40a5fe"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "e92ec417-0df1-44c1-8461-2c1be51891d9",
+									"disabled": true
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | subcategoryId | uuid | Subcategory ID | Yes |\n| Body | name | String | Subcategory name | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Subcategory updated successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Subcategory not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a subcategory by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Calzado dama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/subcategories/8abcefcd-1baf-442b-a56f-e42caa40a5fe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"subcategories",
+								"8abcefcd-1baf-442b-a56f-e42caa40a5fe"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "e92ec417-0df1-44c1-8461-2c1be51891d9",
+									"disabled": true
+								}
+							]
+						},
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | subcategoryId | uuid | Subcategory ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 204 | Subcategory deleted successfully |\n| 401 | Unauthorized request |\n| 404 | Subcategory not found |\n| 500 | Internal server error |"
+					},
+					"response": []
+				}
+			],
+			"description": "The subcategories endpoints enable you to handle subcategories, which are more specific divisions within a category. You can retrieve a list of all subcategories, create new subcategories, update existing subcategories, and delete subcategories. These endpoints provide further granularity in organizing products within their respective categories."
+		},
+		{
+			"name": "Health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/health",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "The health check endpoint allows you to verify the status and health of the application. It is typically used to determine if the application is running and functioning correctly.\n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"juliadmin@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/auth/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "StartFragment\n\nThe user login endpoint is used for user authentication. It allows users to log in by providing their email and password. You can make a POST request to `/login` with the email and password in the request body to authenticate and retrieve a bearer token.\n\nEndFragment\n\n| Class | Parameter | Type | Description |\n| --- | --- | --- | --- |\n| Body | `email` | `String` | **Required** |\n| Body | `password` | `String` | **Required** |\n\nStartFragment\n\n##### Response\n\n| HTTP Status Code | Description |\n| --- | --- |\n| 200 | Successful login |\n| 401 | Unauthorized Request |\n| 500 | Internal server error |\n\nEndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/profile",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"profile"
+					]
+				},
+				"description": "The user profile endpoint retrieves the profile information of the authenticated user. It requires a valid bearer token in the request header for authentication.\n\n| Class | Parameter | Type | Description | **Required** |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Authorization token | Yes |\n\n##### Response\n\n| HTTP Status Code | Description |\n| --- | --- |\n| 200 | Operation Successful |\n| 401 | Unauthorized Request |\n| 500 | Internal server error |"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "payload",
+				"value": "{\r\n    \"id\": \"0aa16f63-292e-4a60-bb88-42a32051917b\",\r\n    \"role\": \"admin\"\r\n}",
+				"type": "string"
+			},
+			{
+				"key": "secret",
+				"value": "StudyCornDev",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "deployed",
+			"value": "https://narc-ecommerce.lat",
+			"type": "string"
+		}
+	]
+}

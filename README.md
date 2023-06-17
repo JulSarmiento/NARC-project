@@ -84,10 +84,10 @@ npm install
 Create a .env file in the root directory of the project and add the following environment variables to configure your database connection. Make sure to replace the values with your actual database configuration.
 
 ```shell
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=myuser
-DB_PASSWORD=mypassword
+PORT_TO_USE=port_to_use
+DB_PASSWORD=elephant_password
+DB_NAME=elephant_database
+JWT_SECRET=auth_secret
 ```
 #### Start the server
 Once the dependencies are installed and the environment variables are configured, you can start the server using the following command:
@@ -102,17 +102,15 @@ npm start
 
 1. Clone the repository.
 2. Install project dependencies: `npm install`.
-3. Configure Firebase credentials.
-4. Deploy the functions to Firebase: `firebase deploy --only functions`.
+3. Deploy to Firebase: `firebase deploy --only functions` or `firebase deploy`
 
-### Deployment with GitHub Actions and Firebase Functions
+### Deployment with GitHub Actions and Firebase Functions (no runners aviailables)
 
 1. Clone the repository.
 2. Create a Firebase project and obtain the credentials.
-3. Configure the environment variables in GitHub Actions with the Firebase credentials.
-4. Make the necessary changes in the GitHub Actions configuration file.
-5. Commit and push to your GitHub repository.
-6. GitHub Actions will automate the deployment of the functions to Firebase.
+3. Configure the environment variables in GitHub Actions with the Firebase credentials in GitHub Secrets.
+4. Commit and push to your GitHub repository.
+5. GitHub Actions will automate the deployment of the functions to Firebase.
 
 
 ## Authors

@@ -22,6 +22,11 @@ Store.init(
     image: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    ownerId: {
+      type: DataTypes.UUID,
+      unique: true,
+      allowNull: false,
     }},
   {
     sequelize,

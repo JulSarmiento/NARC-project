@@ -1,5 +1,12 @@
 import { Op } from "sequelize";
 
+/**
+ * @description Advance search middleware
+ * @param {e.Request} req
+ * @param {e.Response} _res
+ * @param {e.NextFunction} next
+ * @returns {e.NextFunction}
+ */
 export default (req, _res, next) => {
   const where = {};
 

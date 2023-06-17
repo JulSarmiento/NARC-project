@@ -9,6 +9,8 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
 
   console.log("Seeding database...");
 
+  // CATEGORY SEEDER
+
   const categories = await Category.bulkCreate([
     { name: "Comida" },
     { name: "Ropa" },
@@ -19,6 +21,7 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
   console.log("> Categories created");
   console.table(categories.map((category) => category.dataValues));
 
+  // SUBCATEGORY SEEDER
   const names = [
     [
       "China",
@@ -51,28 +54,111 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
     subcategories.map((subcategory) => subcategory.map((sub) => sub.dataValues))
   );
 
+  // USER SEERDER
+
+  const userClient = await User.create({
+    dni: "1357924680",
+    name: "Carlos",
+    lastname: "López",
+    email: "carlosl@example.com",
+    birthdate: "1998-09-20",
+    password: "1234567",
+    phone: "123456789",
+    address: "Calle Principal 567, Ciudad, Departamento, Apartamento 404",
+    role: "client",
+    status: true
+  });
+
+  const userClient2 = await User.create({
+    dni: '9876543210',
+    name: 'Ana',
+    lastname: 'García',
+    email: 'ana@example.com',
+    birthdate: '1995-05-15',
+    password: 'password123',
+    phone: '987654321',
+    address: 'Calle Principal 123, Ciudad, Departamento',
+    role: 'client',
+    status: true,
+  });
+
+  const userSeller = await User.create({
+    dni: '2468135792',
+    name: 'Juan',
+    lastname: 'Pérez',
+    email: 'juanp@example.com',
+    birthdate: '1990-05-15',
+    password: 'password123',
+    phone: '987654321',
+    address: 'Avenida Principal 123, Ciudad, Departamento',
+    role: 'seller',
+    status: true,
+  });
+
+  const userSeller2 = await User.create({
+    dni: '2468135790',
+    name: 'Pedro',
+    lastname: 'Martínez',
+    email: 'pedro@example.com',
+    birthdate: '1980-10-01',
+    password: 'password456',
+    phone: '987654321',
+    address: 'Calle Secundaria 456, Ciudad, Departamento',
+    role: 'seller',
+    status: true,
+  });
+
+  const userSeller3 = await User.create({
+    dni: "9876543235",
+    name: "Juan",
+    lastname: "Gómez",
+    email: "juang@example.com",
+    birthdate: "1990-05-15",
+    password: "sellerpass",
+    phone: "987654321",
+    address: "Calle Comercial 123, Ciudad, Departamento",
+    role: "seller",
+    status: true
+  });
+
+  console.log("> User created");
+  console.table(userClient.dataValues);
+  console.table(userClient2.dataValues);
+  console.table(userSeller.dataValues);
+  console.table(userSeller2.dataValues);
+  console.table(userSeller3.dataValues);
+
+  // STORE SEEDER
+  console.log('userSeller.id', userSeller.id)
+
   const store = await Store.create({
     name: "Tienda de la esquina",
     categoryId: categories[0].id,
     image: "https://picsum.photos/200",
+    ownerId: userSeller.id,
   });
 
   const store2 = await Store.create({
     name: 'Fashion Boutique',
     categoryId: categories[2].id,
     image: 'https://picsum.photos/200',
+    ownerId: userSeller2.id,
   });
   
   const store3 = await Store.create({
     name: 'Electronics World',
     categoryId: categories[1].id,
     image: 'https://picsum.photos/200',
+    ownerId: userSeller3.id,
   });
 
   console.log("> Store created");
   console.table(store.dataValues);
   console.table(store2.dataValues);
   console.table(store3.dataValues);
+
+
+  // PRODUCT SEEDER
 
   const product1 = await Product.create({
     name: "Arroz",
@@ -175,64 +261,7 @@ import { Category, Product, Store, Subcategory, Cart, User } from "../models/ind
   console.table(product8.dataValues);
   console.table(product9.dataValues);
     
-
-  const userClient = await User.create({
-    dni: "1357924680",
-    name: "Carlos",
-    lastname: "López",
-    email: "carlosl@example.com",
-    birthdate: "1998-09-20",
-    password: "1234567",
-    phone: "123456789",
-    address: "Calle Principal 567, Ciudad, Departamento, Apartamento 404",
-    role: "client",
-    status: true
-  });
-
-  const userClient2 = await User.create({
-    dni: '9876543210',
-    name: 'Ana',
-    lastname: 'García',
-    email: 'ana@example.com',
-    birthdate: '1995-05-15',
-    password: 'password123',
-    phone: '987654321',
-    address: 'Calle Principal 123, Ciudad, Departamento',
-    role: 'client',
-    status: true,
-  });
-
-  const userSeller = await User.create({
-    dni: '2468135790',
-    name: 'Juan',
-    lastname: 'Pérez',
-    email: 'juanp@example.com',
-    birthdate: '1990-05-15',
-    password: 'password123',
-    phone: '987654321',
-    address: 'Avenida Principal 123, Ciudad, Departamento',
-    role: 'seller',
-    status: true,
-  });
-
-  const sellerUser2 = await User.create({
-    dni: '2468135790',
-    name: 'Pedro',
-    lastname: 'Martínez',
-    email: 'pedro@example.com',
-    birthdate: '1980-10-01',
-    password: 'password456',
-    phone: '987654321',
-    address: 'Calle Secundaria 456, Ciudad, Departamento',
-    role: 'seller',
-    status: true,
-  });
-
-  console.log("> User created");
-  console.table(userClient.dataValues);
-  console.table(userClient2.dataValues);
-  console.table(userSeller.dataValues);
-  console.table(sellerUser2.dataValues);
+  // CART SEEDER 
 
   const cart = await Cart.create({
     userId: userClient.id,

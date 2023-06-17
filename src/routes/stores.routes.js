@@ -23,6 +23,7 @@ import { getCart, addProductToCart } from "../controllers/cart.Controller.js";
 import {
   rolValidator,
   advanceSearch,
+  checkOwnership,
   validateCreateProduct,
   validateUpdateProduct,
   validateCreateStore,
@@ -35,16 +36,16 @@ const router = express.Router();
 // Stores
 router.get("/", [authentication, advanceSearch, rolValidator('client')], getStores);
 router.get("/:id",[authentication, rolValidator('client')], getStoreById);
-router.post("/", [authentication, rolValidator('seller'), validateCreateStore], createStore);
-router.patch("/:id", [authentication, rolValidator('seller'), validateUpdateStore], updateStore);
-router.delete("/:id", [authentication, rolValidator('seller')], deleteStore);
+router.post("/", [authentication, rolValidator('seller'), checkOwnership, validateCreateStore], createStore);
+router.patch("/:id", [authentication, rolValidator('seller'), checkOwnership, validateUpdateStore], updateStore);
+router.delete("/:id", [authentication, rolValidator('seller')], checkOwnership, deleteStore);
 
 // Products
 router.get("/:storeId/products", [authentication, advanceSearch], getProducts);
 router.get("/:storeId/products/:id", [authentication], getProductById);
-router.post("/:storeId/products", [authentication, rolValidator('seller'), validateCreateProduct], createProduct);
-router.patch("/:storeId/products/:id", [authentication, rolValidator('seller'), validateUpdateProduct], updateProduct);
-router.delete("/:storeId/products:id", [authentication, rolValidator('seller')], deleteProduct);
+router.post("/:storeId/products", [authentication, rolValidator('seller'), checkOwnership, validateCreateProduct], createProduct);
+router.patch("/:storeId/products/:id", [authentication, rolValidator('seller'), checkOwnership, validateUpdateProduct], updateProduct);
+router.delete("/:storeId/products:id", [authentication, rolValidator('seller'), checkOwnership], deleteProduct);
 
 // Cart
 router.get("/:storeId/cart", [authentication, rolValidator('client')],getCart);

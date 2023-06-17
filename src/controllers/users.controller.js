@@ -2,7 +2,16 @@ import httpStatus from "http-status";
 
 import { User, Order, Cart, Product } from "../models/index.js";
 
-// GET list all users
+/**
+ * 
+ * @param {e.Request} _req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get all users
+ * @example GET /users
+ * @example GET /users?rol=admin
+ */
 export const getUsers = async (_req, res, next) => {
   try {
     const users = await User.findAll();
@@ -15,7 +24,15 @@ export const getUsers = async (_req, res, next) => {
   }
 };
 
-// GET user by id
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get a user by id
+ * @example GET /users/:userId
+ */
 export const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -32,7 +49,15 @@ export const getUserById = async (req, res, next) => {
   }
 };
 
-// POST create user
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Create a new user
+ * @example POST /users
+ */
 export const createUser = async (req, res, next) => {
   try {
     const user = await User.create(req.body);
@@ -46,7 +71,15 @@ export const createUser = async (req, res, next) => {
   }
 };
 
-// PATCH update user
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
+ * @returns 
+ * @description Update a user
+ * @example PATCH /users/:userId
+ */
 export const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -64,7 +97,15 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-// DELETE user
+/**
+ * 
+ * @param {e.Request} _req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Delete a user
+ * @example DELETE /users/:userId
+ */
 export const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;

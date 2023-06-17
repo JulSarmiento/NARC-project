@@ -1,5 +1,12 @@
 import httpStatus from "http-status";
 
+/**
+ * @description Validate if the user is 18 years old or older
+ * @param {e.Request} req
+ * @param {e.Response} _res
+ * @param {e.NextFunction} next
+ * @returns {e.NextFunction}
+ */
 export default (req, res, next) => {
   const { birthdate } = req.body;
 

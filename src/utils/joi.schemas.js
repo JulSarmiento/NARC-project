@@ -41,12 +41,14 @@ export const createStoreSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
   image: Joi.string().required(),
   categoryId: Joi.string().required(),
+  ownerId: Joi.string().required(),
 });
 
 export const updateStoreSchema = Joi.object({
   name: Joi.string().min(3).max(50).optional(),
   image: Joi.string().optional(),
   categoryId: Joi.string().optional(),
+  ownerId: Joi.string().optional(),
 });
 
 // Product Schema

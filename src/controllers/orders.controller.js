@@ -2,6 +2,15 @@ import httpStatus from "http-status";
 
 import { Order, User, Product, Cart, CartItem } from "../models/index.js";
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get all orders
+ * @example GET /store/:storeId/orders
+ */
 export const getOrders = async (req, res, next) => {
   const { storeId } = req.params;
   try {
@@ -18,6 +27,15 @@ export const getOrders = async (req, res, next) => {
   }
 };
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns 
+ * @description Get an order by id
+ * @example GET /store/:storeId/orders/:orderId
+ */
 export const getOrder = async (req, res, next) => {
   const { storeId, orderId } = req.params;
   try {
@@ -41,6 +59,15 @@ export const getOrder = async (req, res, next) => {
   }
 };
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns 
+ * @description Create an order
+ * @example POST /store/:storeId/orders
+ */
 export const createOrder = async (req, res, next) => {
   const { storeId } = req.params;
   const { id: userId, address } = req.user;

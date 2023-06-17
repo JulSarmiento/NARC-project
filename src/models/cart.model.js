@@ -2,6 +2,7 @@ import { Model, DataTypes } from "sequelize";
 import sequelize from "../utils/postgresql.config.js";
 
 class Cart extends Model {}
+
 class CartItem extends Model {}
 
 Cart.init(

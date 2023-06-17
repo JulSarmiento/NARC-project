@@ -4,17 +4,12 @@ import { Category, Subcategory } from "../models/index.js";
 /**
  * 
  * @param {e.Request} _req 
- * @param {*} res 
- * @param {*} next 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
  * @returns
  * @description Get all categories
- * @example GET /api/v1/categories
- * {
- * "success": true,
- * "data": [
- * {
- * "id": 1,
- * }
+ * @example GET /categories
+ * @example GET /categories?name=categoryName
  */
 export const getCategories = async (_req, res, next) => {
   try {
@@ -31,6 +26,16 @@ export const getCategories = async (_req, res, next) => {
   };
 };
 
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get a category by id
+ * @example GET /categories/:categoryId
+ */
 export const getCategoryById = async (req, res, next) => {
   try {
     const { categoryId } = req.params;
@@ -46,6 +51,16 @@ export const getCategoryById = async (req, res, next) => {
   };
 };
 
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Create a category
+ * @example POST /categories
+ */
 export const createCategory = async (req, res, next) => {
   try {
     const category = await Category.create(req.body);
@@ -58,6 +73,15 @@ export const createCategory = async (req, res, next) => {
   };
 };
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Update a category
+ * @example PUT /categories/:categoryId
+ */
 export const updateCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.params;
@@ -75,6 +99,15 @@ export const updateCategory = async (req, res, next) => {
   };
 };
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Delete a category
+ * @example DELETE /categories/:categoryId
+ */
 export const deleteCategory = async (req, res, next) => {
   try {
     const { categoryId } = req.params;

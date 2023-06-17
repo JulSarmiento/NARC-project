@@ -4,12 +4,12 @@ import { Cart, CartItem, Product } from "../models/index.js";
 
 /**
  * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * @param {e.Request} req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
  * @returns
  * @description Get cart
- * @example GET /api/v1/cart/:storeId
+ * @example GET store/:storeId/cart/:storeId
  */
 export const getCart = async (req, res, next) => {
   const { storeId } = req.params;
@@ -32,21 +32,12 @@ export const getCart = async (req, res, next) => {
 
 /**
  * 
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {e.Request} req 
+ * @param {e.Response} res 
+ * @param {e.NextFunction} next 
  * @returns
  * @description Add product or delete a product to cart
- * @example POST /api/v1/cart/:storeId
- * {
- *  "productId": 1,
- *  "count": 1
- * }
- * @example DELETE /api/v1/cart/:storeId
- * {
- *  "productId": 1,
- *  "count": 0
- * }
+ * @example POST store/:storeId/cart/:storeId
  */
 export const addProductToCart = async (req, res, next) => {
   const { storeId } = req.params;

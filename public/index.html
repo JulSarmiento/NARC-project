@@ -2,122 +2,118 @@
 <html>
   <head>
     <title>Welcome to Narc API!</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-
-      .header {
-        background-color: #f5f5f5;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .logo {
-        width: 200px;
-        height: auto;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .section-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-
-      .link {
-        color: #007bff;
-        text-decoration: none;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" />
+    <link rel="stylesheet" href="styles/base.css" />
   </head>
   <body>
     <header class="header">
-      <img
-        class="logo"
-        src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png"
-        alt="Logo" />
-      <h1>NARC E-commerce</h1>
+      <div class="container">
+        <img
+          class="logo"
+          src="https://firebasestorage.googleapis.com/v0/b/narc-e-commerce.appspot.com/o/narc-banner-transparent.png?alt=media&token=5052c559-1de7-45fb-8e2c-58a921945bdb"
+          alt="Logo" />
+      </div>
     </header>
-    <div class="container">
-      <section>
-        <h2 class="section-title">Deployed URL</h2>
-        <a class="link" href="https://narc-ecommerce.lat">NARC-ecommerce</a>
+
+    <main>
+      <section id="home" class="flex-center">
+        <div class="text-center container">
+          <img
+            class="logo"
+            src="https://firebasestorage.googleapis.com/v0/b/narc-e-commerce.appspot.com/o/narc-banner-transparent.png?alt=media&token=5052c559-1de7-45fb-8e2c-58a921945bdb"
+            alt="Logo" />
+
+          <h1 class="section-title">Welcome to Narc API!</h1>
+
+          <p>
+            The Ecommerce project is an API that manages an online store,
+            allowing the administration of users with roles such as
+            administrator, customer, and vendor. The application also provides
+            functionalities for managing stores, products, shopping carts, and
+            purchase orders. The project uses PostgreSQL as the database and
+            interacts with it through the Sequelize ORM. The PostgreSQL database
+            is hosted on the ElephantSQL platform.
+          </p>
+        </div>
       </section>
 
-      <section>
-        <h2 class="section-title">Google Service Account</h2>
-        <a
-          class="link"
-          href="https://console.cloud.google.com/iam-admin/serviceaccounts/details/101832751034889941786/keys?hl=es&project=narc-e-commerce"
-          >Google Service Account</a
-        >
+      <section id="features" class="container">
+        <img
+          class="img-fit-contain"
+          src="https://firebasestorage.googleapis.com/v0/b/narc-e-commerce.appspot.com/o/2.png?alt=media&token=adc02bf3-6ab7-4780-8006-022c7b839eef"
+          alt="" />
+        <div class="container flex-center">
+          <div>
+            <h2 class="section-title">Our Users:</h2>
+            <ul>
+              <li>Can login and register</li>
+              <li>Can view their profile</li>
+              <li>Can update their profile</li>
+              <li>Can delete their profile</li>
+              <li>Can create a stores</li>
+              <li>Can view their stores</li>
+              <li>Can update their stores</li>
+              <li>Can delete their stores</li>
+              <li>Can create carts</li>
+              <li>Can view their carts</li>
+              <li>Can update their carts</li>
+              <li>Can delete their carts</li>
+              <li>Can create orders</li>
+              <li>Can view their orders</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <section>
-        <h2 class="section-title">Secret Manager</h2>
-        <a
-          class="link"
-          href="https://console.cloud.google.com/security/secret-manager?hl=es&project=narc-e-commerce"
-          >Secret Manager</a
-        >
-      </section>
+      <section id="specs" class="light">
+        <h2 class="text-center">Built in specs</h2>
+        <div class="container">
+          <a class="link" href="https://narc-ecommerce.lat/health">
+            <i class="fab fa-file"></i>
+            Health-check</a
+          >
 
-      <section>
-        <h2 class="section-title">Technologies Used</h2>
-        <ul>
-          <li>dotenv</li>
-          <li>express</li>
-          <li>http-status</li>
-          <li>joi</li>
-          <li>jsonwebtoken</li>
-          <li>morgan</li>
-          <li>nodemon</li>
-          <li>pg</li>
-          <li>pg-hstore</li>
-          <li>sequelize</li>
-          <li>@types/express</li>
-        </ul>
-      </section>
+          <a href="https://documenter.getpostman.com/view/12454930/2s93shzUri">
+            <i class="fab fa-file"></i>
+            Postman Documentation
+          </a>
 
-      <section>
-        <h2 class="section-title">Environment Variables</h2>
-        <ul>
-          <li>PORT</li>
-          <li>ENVIRONMENT</li>
-          <li>POSTGRES_PASSWORD</li>
-          <li>POSTGRES_DB</li>
-          <li>JWT_SECRET</li>
-        </ul>
+          <a href="https://github.com/JulSarmiento/NARC-project">
+            <i class="fa-brands fa-github"></i>
+            Github Repository
+          </a>
+        </div>
       </section>
+    </main>
 
-      <section>
-        <h2 class="section-title">Installation</h2>
-        <pre>
-        <code>git clone &lt;repository-url&gt;</code>
-        <code>npm install</code>
-        <code># Configure environment variables creating a .env file in the root directory and add this environment variables.</code>
-        <code>DB_HOST=localhost</code>
-        <code>DB_PORT=5432</code>
-        <code>DB_USER=myuser</code>
-        <code>DB_PASSWORD=mypassword</code>
-        <code>npm start</code>
-      </pre>
-      </section>
-
-      <section>
-        <h2 class="section-title">Deployment</h2>
-        <pre>
-        <code>npm run deploy</code>
-      </pre>
-      </section>
-    </div>
+    <footer>
+      <div class="container text-end">
+        <p class="footer-text">Build by Julieth Sarmiento @JulSarmiento</p>
+        <div class="social-icons">
+          Follow me:
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="https://github.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

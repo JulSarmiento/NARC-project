@@ -11,13 +11,14 @@ import {
 import {
   rolValidator,
   ageValidator,
+  advanceSearch,
   validateCreateUser,
   validateUpdateUser,
 } from "../middlewares/index.js";
 
 const router = express.Router();
 
-router.get("/", [authentication, rolValidator('admin')], getUsers);
+router.get("/", [authentication, rolValidator('admin'), advanceSearch], getUsers);
 router.get("/:id", [authentication, rolValidator('admin')], getUserById);
 router.post("/", [ageValidator, validateCreateUser], createUser);
 router.patch("/:id", [authentication, rolValidator('client'), validateUpdateUser] ,updateUser);

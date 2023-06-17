@@ -5,10 +5,11 @@ import { User } from "../models/index.js";
 
 /**
  * 
- * @param {*} req 
- * @param {*} res 
+ * @param {e.Request} req 
+ * @param {e.Response} res 
  * @returns 
  * @description Login a user
+ * @example POST /auth/login
  */
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -45,8 +46,8 @@ export const login = async (req, res) => {
 
 /**
  * 
- * @param {*} req
- * @param {*} res
+ * @param {e.Request} req
+ * @param {e.Response} res
  * @returns
  * @description Register a user
 */

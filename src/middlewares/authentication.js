@@ -1,7 +1,13 @@
 import JWT from 'jsonwebtoken';
 import httpStatus from 'http-status';
 
-
+/**
+ * @description Middleware to validate token
+ * @param {e.Request} req
+ * @param {e.Response} _res
+ * @param {e.NextFunction} next
+ * @returns {e.NextFunction}
+ */
 export default (req, res, next) => {
   const { authorization } = req.headers;
 

@@ -1,7 +1,17 @@
 import httpStatus from "http-status";
 import { Store, Category, Order, Product } from "../models/index.js";
 
-// GET all stores
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get all stores
+ * @example GET /stores
+ * @example GET /stores?name=storeName
+ * @example GET /stores?name=storeName&category=categoryId
+ */
 export const getStores = async (req, res, next) => {
   try {
 
@@ -27,7 +37,16 @@ export const getStores = async (req, res, next) => {
   }
 };
 
-// GET store by id or name
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get store by id
+ * @example GET /stores/:storeId
+ */
 export const getStoreById = async (req, res, next) => {
   try{
     const store = await Store.findByPk(req.params.id, {
@@ -44,7 +63,16 @@ export const getStoreById = async (req, res, next) => {
   }
 }
 
-// POST new store
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Create a store
+ * @example POST /stores
+ */
 export const createStore = async (req, res, next) => {
   try {
     const store = await Store.create(req.body);
@@ -57,8 +85,16 @@ export const createStore = async (req, res, next) => {
   }
 };
 
-// PATCH store by id
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Update a store by id
+ * @example PUT /stores/:storeId
+ */
 export const updateStore = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -84,8 +120,16 @@ export const updateStore = async (req, res, next) => {
   }
 };
 
-// DELETE store by id
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Delete a store by id
+ * @example DELETE /stores/:storeId
+ */
 export const deleteStore = async (req, res, next) => {
   try {
     const { id } = req.params;

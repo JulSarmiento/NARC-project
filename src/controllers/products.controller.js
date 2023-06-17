@@ -1,7 +1,19 @@
 import httpStatus from "http-status";
 import { Product, Store, Subcategory } from "../models/index.js";
 
-// GET all products
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get all products
+ * @example GET /products
+ * @example GET /products?name=product1
+ * @example GET /products?name=product1&price=100
+ * @example GET /products?name=product1&price=100&categoryId=1
+ */
 export const getProducts = async (req, res, next) => {
   try {
     console.log('req.where', req.where)
@@ -28,7 +40,16 @@ export const getProducts = async (req, res, next) => {
   }
 };
 
-// GET product by id or name
+
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get product by id
+ * @example GET store/:storeid/products/:productid
+ */
 export const getProductById = async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id, {
@@ -45,7 +66,15 @@ export const getProductById = async (req, res, next) => {
   }
 };
 
-// POST new product
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Create a product
+ * @example POST store/:storeid/products
+ */
 export const createProduct = async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
@@ -58,7 +87,15 @@ export const createProduct = async (req, res, next) => {
   }
 };
 
-// PATCH product by id
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Update a product by id
+ * @example PUT store/:storeid/products/:productid
+ */
 export const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -85,7 +122,15 @@ export const updateProduct = async (req, res, next) => {
   }
 };
 
-// DELETE product by id
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Delete a product by id
+ * @example DELETE store/:storeid/products/:productid
+ */
 export const deleteProduct = async (req, res, next) => {
   try {
     const { id } = req.params;

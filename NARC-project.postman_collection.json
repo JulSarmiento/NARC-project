@@ -14,16 +14,6 @@
 				{
 					"name": "GET all users",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjYxMzU3MiwiZXhwIjoxNjg2NjE1MzcyfQ.i8xiVOZTUHpuhE-DQK195jOdd6DKlSPb_orK6x4rChs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -197,21 +187,11 @@
 				{
 					"name": "POST Create a new store",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Los trapitos de Vader\",\r\n  \"image\": \"https://example.com/ropa.jpg\",\r\n  \"categoryId\": \"c8af74bc-4f11-485a-8cc0-9e4841927d28\"\r\n}",
+							"raw": "{\r\n  \"name\": \"los muebles de Mazu\",\r\n  \"image\": \"https://example.com/ropa.jpg\",\r\n  \"categoryId\": \"d84efd13-b84a-465f-ab18-8470d6777174\",\r\n  \"ownerId\": \"ccfdad62-859d-4039-a526-94acabbcf3f5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,16 +276,6 @@
 				{
 					"name": "GET all products",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Njg1NjQxMCwiZXhwIjoxNjg2ODU4MjEwfQ.E6wmr348W93lUM759zuSnp9Q5lxS2QCuXvkKE3Dzgzw",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -324,33 +294,16 @@
 				{
 					"name": "GET all products from a store",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYTE2ZjYzLTI5MmUtNGE2MC1iYjg4LTQyYTMyMDUxOTE3YiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4Njg1NjQxMCwiZXhwIjoxNjg2ODU4MjEwfQ.E6wmr348W93lUM759zuSnp9Q5lxS2QCuXvkKE3Dzgzw",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/stores/bec11fa-029b-49ca-a321-c482a78d3e25/products?name=arroz",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"bec11fa-029b-49ca-a321-c482a78d3e25",
-								"products"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "arroz"
-								}
+								"32168be2-4ed8-4a19-b198-720f92d99bd5"
 							]
 						},
 						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
@@ -358,18 +311,20 @@
 					"response": []
 				},
 				{
-					"name": "GET a product by name or ID",
+					"name": "GET a product by ID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/products/arroz tres delicias frito",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/products/b035a173-a656-4dec-b904-f84cbd6b0810",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"stores",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"products",
-								"arroz tres delicias frito"
+								"b035a173-a656-4dec-b904-f84cbd6b0810"
 							]
 						},
 						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Param | id | uuid | Product ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store not found |\n| 500 | Internal server error |"
@@ -379,21 +334,11 @@
 				{
 					"name": "POST a new products",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"Papa\",\r\n  \"description\": \"es una papa.\",\r\n  \"price\": 10,\r\n  \"stock\": 20,\r\n  \"image\": \"https://example.com/images/collar.jpg\",\r\n  \"storeId\": \"9bec11fa-029b-49ca-a321-c482a78d3e25\",\r\n  \"subcategoryId\": \"662a9319-51b7-47c8-ae85-a135441edeac\"\r\n}",
+							"raw": "{\r\n   \"name\": \"Papa Nevada de la montaña\",\r\n  \"description\": \"es una papa muy sabrosa cultivada en la montaña cerca a mi casa\",\r\n  \"price\": 10,\r\n  \"stock\": 20,\r\n  \"image\": \"https://example.com/images/collar.jpg\",\r\n  \"storeId\": \"9466c0e0-4c7c-4360-ac71-a8edf713db5b\",\r\n  \"subcategoryId\": \"f8b372a5-aaf5-4154-84ba-1287b118b082\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -401,13 +346,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/store/9bec11fa-029b-49ca-a321-c482a78d3e25/products",
+							"raw": "{{host}}/stores/9466c0e0-4c7c-4360-ac71-a8edf713db5b/products",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"store",
-								"9bec11fa-029b-49ca-a321-c482a78d3e25",
+								"stores",
+								"9466c0e0-4c7c-4360-ac71-a8edf713db5b",
 								"products"
 							]
 						},
@@ -473,16 +418,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -490,44 +425,28 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/cart?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/cart",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"cart"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "b50becd2-67b3-4088-8438-082be1814415"
-								}
 							]
 						},
-						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
 					},
 					"response": []
 				},
 				{
 					"name": "POST a product in a cart",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"productId\": \"a819af22-612c-4cb5-8380-78f54b5c04a6\",\n    \"count\": 2\n}",
+							"raw": "{\n    \"productId\": \"da3d4c5d-8349-4ad9-b73a-72f5518c2a40\",\n    \"count\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -535,20 +454,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/cart?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/cart",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"cart"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "b50becd2-67b3-4088-8438-082be1814415"
-								}
 							]
 						},
 						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n| Body | productId | uuid | Product ID | Yes |\n| Body | count | Number | Product quantity | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 403 | Forbidden request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
@@ -564,26 +477,16 @@
 				{
 					"name": "GET all orders",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/orders",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/orders",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"orders"
 							]
 						},
@@ -597,40 +500,24 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/stores/8dfbc4e2-1e27-4982-9bbc-18cbea0613de/orders/71016c1d-6057-4bf4-8fc9-d165cce2f16a?userId=c1aac6b9-716a-4403-b269-b8c7827baa7b",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/orders/54d84180-9809-4538-ac2f-cc4cccc38f45",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"8dfbc4e2-1e27-4982-9bbc-18cbea0613de",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"orders",
-								"71016c1d-6057-4bf4-8fc9-d165cce2f16a"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "c1aac6b9-716a-4403-b269-b8c7827baa7b"
-								}
+								"54d84180-9809-4538-ac2f-cc4cccc38f45"
 							]
 						},
-						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Param | orderId | uuid | Order ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Param | orderId | uuid | Order ID | Yes |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 200 | Successful operation |\n| 401 | Unauthorized request |\n| 404 | Store or User not found |\n| 500 | Internal server error |"
 					},
 					"response": []
 				},
 				{
 					"name": "POST a new order",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3MGExMTRkLWFhOGQtNDYwNC05NmFjLTA5YTAyZGYzYTY4NyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjMyOTg1MSwiZXhwIjoxNjg2MzMxNjUxfQ.jqjPfNbUCyET4UMjgba2VH9hUR3owUsy5zEFzdnOwLs",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -643,23 +530,17 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/stores/2f014a87-4f24-4aef-923d-92b496637e00/orders?userId=b50becd2-67b3-4088-8438-082be1814415",
+							"raw": "{{host}}/stores/32168be2-4ed8-4a19-b198-720f92d99bd5/orders",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"stores",
-								"2f014a87-4f24-4aef-923d-92b496637e00",
+								"32168be2-4ed8-4a19-b198-720f92d99bd5",
 								"orders"
-							],
-							"query": [
-								{
-									"key": "userId",
-									"value": "b50becd2-67b3-4088-8438-082be1814415"
-								}
 							]
 						},
-						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Query | userId | uuid | User ID | Yes |\n| Body | coupon | Number | Promotinal value | No |\n| Body | details | String | Orders details | Yes |\n| Body | status | String | Order status | Yes |\n| Body | deliveryAddress | String | Users address or a new one | No |\n| Body | paymentMethod | String | Payment method | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Order created successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 404 | Store not found |\n| 500 | Internal server error |"
+						"description": "| Class | Parameter | Type | Description | Required |\n| --- | --- | --- | --- | --- |\n| Authorization |  | Bearer Token | Bearer token for authentication | Yes |\n| Param | storeId | uuid | Store ID | Yes |\n| Body | coupon | Number | Promotinal value | No |\n| Body | details | String | Orders details | Yes |\n| Body | status | String | Order status | Yes |\n| Body | deliveryAddress | String | Users address or a new one | No |\n| Body | paymentMethod | String | Payment method | No |\n\nResponses\n\n| **Status Code** | **Description** |\n| --- | --- |\n| 201 | Order created successfully |\n| 400 | Bad Request |\n| 401 | Unauthorized request |\n| 404 | Store not found |\n| 500 | Internal server error |"
 					},
 					"response": []
 				}
@@ -672,16 +553,6 @@
 				{
 					"name": "GET all the categories",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZjFmMzRmLTJiMzAtNDMyNy05YzI2LTMwZWE1NjdlN2VmYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NjIzNzcwOSwiZXhwIjoxNjg2MjM5NTA5fQ.Eix5jxJ2irKMYbYV5K3XIJUYx_3LHsYa2L8KzxBSQWg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -994,7 +865,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"juliadmin@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"email\": \"juanp@example.com\",\r\n    \"password\": \"password123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1051,7 +922,7 @@
 		"jwt": [
 			{
 				"key": "payload",
-				"value": "{\r\n    \"id\": \"0aa16f63-292e-4a60-bb88-42a32051917b\",\r\n    \"role\": \"admin\"\r\n}",
+				"value": "{\r\n    \"id\": \"ccfdad62-859d-4039-a526-94acabbcf3f5\",\r\n    \"role\": \"seller\"\r\n}",
 				"type": "string"
 			},
 			{

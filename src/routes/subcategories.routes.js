@@ -2,6 +2,7 @@ import express from "express";
 import { authentication } from "../middlewares/index.js";
 import {
   rolValidator,
+  advanceSearch,
   validateCreateSubcategory,
   validateUpdateSubcategory,
 } from "../middlewares/index.js";
@@ -15,7 +16,7 @@ import {
 
 const router = express.Router();
 
-router.get("/",[authentication], getSubCategories);
+router.get("/",[authentication, advanceSearch], getSubCategories);
 router.post("/subcategoryId", [authentication, rolValidator('admin'), validateUpdateSubcategory], createSubCategory);
 router.patch("/:subcategoryId", [authentication, rolValidator('admin'), validateCreateSubcategory], updateSubCategory);
 router.delete("/:subcategoryId", [authentication, rolValidator('admin')], deleteSubCategory);

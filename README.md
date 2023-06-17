@@ -1,5 +1,5 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://firebasestorage.googleapis.com/v0/b/narc-e-commerce.appspot.com/o/NARC-e-commerce-logo-white.png?alt=media&token=1eae9c91-2b13-4ce9-bbc5-c33c4c936435)
 
 
 # NARC E-commerce

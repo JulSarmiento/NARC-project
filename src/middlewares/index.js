@@ -5,6 +5,8 @@ import authentication from "./authentication.js";
 import rolValidator from "./rol.validator.js";
 import advanceSearch from "./advance.search.js";
 import ageValidator from "./age.validator.js";
+import checkOwnership from "./ownershipt.js";
+
 import {
   createUserSchema,
   updateUserSchema,
@@ -44,6 +46,7 @@ export {
   rolValidator,
   advanceSearch,
   ageValidator,
+  checkOwnership,
   validateCreateUser,
   validateUpdateUser,
   validateCreateStore,

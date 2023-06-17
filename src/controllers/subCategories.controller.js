@@ -1,6 +1,16 @@
 import httpStatus from "http-status";
-import { Category, Subcategory } from "../models/index.js";
+import { Subcategory } from "../models/index.js";
 
+
+/**
+ * 
+ * @param {e.Request} _req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get all subcategories
+ * @example GET /subcategories
+ */
 export const getSubCategories = async (_req, res, next) => {
   try {
     const subcategories = await Subcategory.findAll();
@@ -13,6 +23,15 @@ export const getSubCategories = async (_req, res, next) => {
   };
 }
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Get subcategory by id
+ * @example GET /subcategories/:subcategoryId
+ */
 export const createSubCategory = async (req, res, next) => {
   try {
     const subcategory = await Subcategory.create(req.body);
@@ -25,6 +44,15 @@ export const createSubCategory = async (req, res, next) => {
   };
 };
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Update subcategory by id
+ * @example PUT /subcategories/:subcategoryId
+ */
 export const updateSubCategory = async (req, res, next) => {
   try {
     const { subcategoryId } = req.params;
@@ -41,6 +69,15 @@ export const updateSubCategory = async (req, res, next) => {
 };
 
 
+/**
+ * 
+ * @param {e.Request} req 
+ * @param {e.Respond} res 
+ * @param {e.NextFunction} next 
+ * @returns
+ * @description Delete subcategory by id
+ * @example DELETE /subcategories/:subcategoryId
+ */
 export const deleteSubCategory = async (req, res, next) => {
   try {
     const { subcategoryId } = req.params;

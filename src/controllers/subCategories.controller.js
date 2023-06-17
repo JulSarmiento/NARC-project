@@ -4,19 +4,30 @@ import { Subcategory } from "../models/index.js";
 
 /**
  * 
- * @param {e.Request} _req 
+ * @param {e.Request} req 
  * @param {e.Respond} res 
  * @param {e.NextFunction} next 
  * @returns
  * @description Get all subcategories
  * @example GET /subcategories
  */
-export const getSubCategories = async (_req, res, next) => {
+export const getSubCategories = async (req, res, next) => {
   try {
-    const subcategories = await Subcategory.findAll();
+    
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const subcategories = await Subcategory.findAndCountAll({
+      where: req.where,
+      limit,
+      offset
+    });
     res.status(httpStatus.OK).json({
       success: true,
-      data: subcategories
+      data: subcategories,
+      totalItems: subcategories.count,
+      totalPages: Math.ceil(subcategories.count / limit),
+      currentPage: parseInt(page, 10),
     });
   } catch (error) {
     next(error);

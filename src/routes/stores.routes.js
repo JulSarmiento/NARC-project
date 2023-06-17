@@ -34,7 +34,7 @@ import {
 const router = express.Router();
 
 // Stores
-router.get("/", [authentication, advanceSearch, rolValidator('client')], getStores);
+router.get("/", [authentication, rolValidator('client'), advanceSearch], getStores);
 router.get("/:id",[authentication, rolValidator('client')], getStoreById);
 router.post("/", [authentication, rolValidator('seller'), checkOwnership, validateCreateStore], createStore);
 router.patch("/:id", [authentication, rolValidator('seller'), checkOwnership, validateUpdateStore], updateStore);

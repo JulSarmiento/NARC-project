@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { Op, Sequelize } from "sequelize";
 
 /**
  * @description Advance search middleware
@@ -10,7 +10,7 @@ import { Op } from "sequelize";
 export default (req, _res, next) => {
   const where = {};
 
-  Object.entries(req.query).forEach(([key, values]) => {
+  Object.entries(req.query).forEach(([key]) => {
     // offset
     if (key === "page") {
       where.offset = parseInt((req.query.page || 1, 10) - 1);
@@ -22,9 +22,10 @@ export default (req, _res, next) => {
       // in
     } else if (key.includes(".")) {
       const modKey = `$${key}$`;
-      where[modKey] = {
-        [Op.iLike]: `%${req.query[key]}%`,
-      };
+      where[modKey] = Sequelize.where(
+        Sequelize.fn('unaccent', Sequelize.col(key)), {
+          [Op.iLike]:`%${req.query[key]}%`
+      });
     } else if (key.includes("__lte")) {
       where[key.replace("__lte", "")] = {
         [Op.lte]: req.query[key],
@@ -32,12 +33,6 @@ export default (req, _res, next) => {
     } else if (key.includes("__in")) {
       where[key.replace("__in", "")] = {
         [Op.in]: req.query[key].split(","),
-      };
-
-      // contains
-    } else if (key.includes("__contains")) {
-      where[key.replace("__contains", "")] = {
-        [Op.iLike]: `%${req.query[key]}%`,
       };
 
       // startWith
@@ -52,9 +47,10 @@ export default (req, _res, next) => {
         [Op.endsWith]: `%${req.query[key]}`,
       };
     } else {
-      where[key] = where[key] = {
-        [Op.iLike]: `%${req.query[key]}%`,
-      };
+      where[key] = Sequelize.where(
+        Sequelize.fn('unaccent', Sequelize.col(key)), {
+          [Op.iLike]:`%${req.query[key]}%`
+      });
     }
   });
 

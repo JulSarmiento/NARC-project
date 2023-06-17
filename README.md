@@ -115,9 +115,6 @@ npm start
 6. GitHub Actions will automate the deployment of the functions to Firebase.
 
 
-
-
-
 ## Authors
 
 - [@Julieth Sarmiento](https://github.com/JulSarmiento)

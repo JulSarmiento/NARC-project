@@ -1,10 +1,10 @@
 import httpStatus from "http-status";
-
 import { User, Order, Cart, Product } from "../models/index.js";
+
 
 /**
  * 
- * @param {e.Request} _req 
+ * @param {e.Request} req 
  * @param {e.Response} res 
  * @param {e.NextFunction} next 
  * @returns
@@ -12,12 +12,22 @@ import { User, Order, Cart, Product } from "../models/index.js";
  * @example GET /users
  * @example GET /users?rol=admin
  */
-export const getUsers = async (_req, res, next) => {
+export const getUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+    
+    const users = await User.findAndCountAll({
+      where: req.where,
+      limit,
+      offset,
+    });
     res.status(httpStatus.OK).json({
       success: true,
       data: users,
+      totalItems: users.count,
+      totalPages: Math.ceil(users.count / limit),
+      currentPage: parseInt(page, 10),
     });
   } catch (error) {
     next(error);

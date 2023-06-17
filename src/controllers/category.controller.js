@@ -3,7 +3,7 @@ import { Category, Subcategory } from "../models/index.js";
 
 /**
  * 
- * @param {e.Request} _req 
+ * @param {e.Request} req 
  * @param {e.Respond} res 
  * @param {e.NextFunction} next 
  * @returns
@@ -11,14 +11,23 @@ import { Category, Subcategory } from "../models/index.js";
  * @example GET /categories
  * @example GET /categories?name=categoryName
  */
-export const getCategories = async (_req, res, next) => {
+export const getCategories = async (req, res, next) => {
   try {
-    const categories = await Category.findAll({
-      include: Subcategory
+    const { page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const categories = await Category.findAndCountAll({
+      include: Subcategory,
+      where: req.where,
+      limit,
+      offset
     });
     res.status(httpStatus.OK).json({
       success: true,
-      data: categories
+      data: categories,
+      totalItems: categories.count,
+      totalPages: Math.ceil(categories.count / limit),
+      currentPage: parseInt(page, 10),
     });
   } catch (error) {
 

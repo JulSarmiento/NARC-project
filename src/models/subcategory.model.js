@@ -21,3 +21,4 @@ Subcategory.init({
 });
 
 export default Subcategory;
+

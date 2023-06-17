@@ -41,6 +41,11 @@ h1,h2 {
   margin: 0;
 }
 
+.link {
+  text-decoration: none;
+  font-size: 20px;
+}
+
 .container {
   max-width: 80%;
   margin: 0 auto;
@@ -58,6 +63,8 @@ h1,h2 {
 }
 
 .text-center {
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
@@ -89,22 +96,36 @@ h1,h2 {
   max-height: 50vh;
 }
 
-#features {
-  display: grid;
-  grid-template-columns: 50% 50%;
+#health-check a{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #specs .social-icons{
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
 }
 
 #specs .container {
   display: flex;
-  flex: 1;
-  padding: 0 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
   color: black;
 }
+
+#specs .container .links-n-icons a {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
 
 
 @media screen and (min-width: 600px) {

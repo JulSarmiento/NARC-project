@@ -36,7 +36,7 @@ const router = express.Router();
 // Stores
 router.get("/", [authentication, rolValidator('client'), advanceSearch], getStores);
 router.get("/:id",[authentication, rolValidator('client')], getStoreById);
-router.post("/", [authentication, rolValidator('seller'), checkOwnership, validateCreateStore], createStore);
+router.post("/", [authentication, rolValidator('seller'), validateCreateStore], createStore);
 router.patch("/:id", [authentication, rolValidator('seller'), checkOwnership, validateUpdateStore], updateStore);
 router.delete("/:id", [authentication, rolValidator('seller')], checkOwnership, deleteStore);
 
